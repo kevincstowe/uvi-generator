@@ -1,0 +1,546 @@
+<?xml version="1.0"?>
+
+<!-- 
+IMPORTANT NOTE: This manual mapping file was created against a specific
+version of VerbNet.  VxC must always be executed with this same VerbNet
+version.  The VerbNet version of this manual mapping file can be found
+in the 'vn-version' attribute of the document element.
+
+This is the manual mapping file created for the VerbNet-Cyc mapping project,
+VxC.  It was created for two reasons.  The first was to have a baseline against
+which to compare the performance of the automated mapping system.  A good
+automated system finds the matches that this file found and discards those
+possible matches that this file discarded.  The second reason was to develop an
+intimate understanding of how both VerbNet and Cyc encode the information
+within.  In depth knowledge of the nuances of each will lead to a better manual
+mapping and a better automatic algorithm.
+
+This file is divided into three parts:
+   1.  Matches
+   2.  Cyc tokens from matched Cyc rules
+   3.  Why a given possible match was discarded
+
+The first part contains the matches themselves.  These are represented by
+"tuple" and "tuple-m" XML elements.  Each match contains a VerbNet class,
+member, and frame and a Cyc rule number.  This means that the given syntactic
+frame for the verb in the given class corresponds to the Cyc verbSemTrans (VST)
+rule with the given number.  This will be the primary section from which
+performance statistics will be generated for the automatic mapping system (VxC).
+
+The second part simply shows those tokens that are located in the Cyc rules
+that are involved in some VerbNet match.  This section was created
+speculatively in the hopes that it would come in handy.  At this point it is
+not used in the VxC system.
+
+The third and final section of the file included reasons why a possible match
+(a.k.a. naive match) was discarded.  Since the automatic system operates much
+the same way the creation of this manual mapping file operated, this section is
+very important.  Naive matches (verb-frame pairs and VST rules with the same
+lemma) are used as the starting point for the mapping.  Then constraints are
+applied iteratively until the possible match has been discarded or survives the
+constraint process. In the case of the manual mapping, these "constraints"
+manifest themselves in the form of an annotator with English fluency using what
+he or she knows of the language to compare the verb-frame pair and the VST rule
+and decide if they are both syntactically and semantically the same. 
+Therefore, during the creation of the manual mapping file, this section of
+"discard reasons" was kept so they they might directly translate into
+constraints for the automatic system. Indeed, this section served that very
+purpose.
+
+The Cyc rule number corresponds only the order that the rule appears in the
+*exact* Cyc rule file provided with the VxC download.  This is an obvious and
+annoying restriction.  What happens if future sets of VST rules are pulled from
+Cyc and they are not in the same order?  Then this manual mapping will not be
+valid.  A mini-mapping must be performed that finds where each Cyc rule from
+the file corresponding to this manual file is located in the new file.  This is
+a facet of the VxC system that can be enhanced one day.  Possibly, a unique
+identifier internal to Cyc can be used instead of the ordering of some file.
+
+Another imperfection is the numbering of the VerbNet frames.  Since there is no
+unique number applied to each and every frame in VerbNet, and primary and
+secondary descriptions being unique in a given file was not assumed, then an
+external numbering has to be created and applied to the frame numbers.  A
+logical, if naive, numbering would have been the order in which they appear in
+the file.  That way a (file, frame number) tuple would uniquely identify the
+frame across the entire VerbNet application.  The method used is actually the
+order in which a frame appears in a recursive traversal from the top-level
+class to the immediate containing class of the frame.  This means that the
+frames in the top-level class are labeled in the order they appear (say, 1, 2,
+3). The frames in the first subclass are labeled in order following the
+top-level class's frames (say, 4, 5). The second subclass of the top-level
+class has its frames numbered in the same way (say, 4, 5, 6).  So there are
+multiple frames with the number 4 tied to them. In this manner, a
+(class/subclass, frame number) is the tuple that uniquely identifies the frame
+across the entirety of VerbNet.  To illustrate this numbering, a figure is
+provided below.  The lower case letter 'f' represents the existence of a frame
+and the number in the brackets is the number assigned to the frame.
+
+ - Class X: f[1], f[2], f[3]
+ -    Subclass X-1: f[4]
+ -       Subclass X-1-1: f[5], f[6]
+ -          Subclass X-1-1-1: f[7], f[8], f[9]
+ -          Subclass X-1-1-2: f[7], f[8]
+ -       Subclass X-1-2: f[5]
+ -          Subclass X-1-2-1: f[6], f[7], f[8], f[9], f[10]
+ -    Subclass X-2: f[4], f[5], f[6]
+ -       Subclass X-2-1: f[7], f[8], f[9]
+ -          Subclass X-2-1-1: f[10]
+ -       Subclass X-2-2: f[7], f[8], f[9]
+ -          Subclass X-2-2-1: f[10], f[11]
+
+Both the manual mapping file and the automatic mapping system, VxC use this
+frame numbering scheme.  Moreover, the primary and secondary descriptions are
+appended to this number for convenience in locating.  The expression f?, where
+? is an integer, always refers to a VerbNet frame in this file.  Finally,
+regardless of the numbering used, consideration should be applied to the
+addition removal, or relocation of frames in VerbNet.  If any frame changes
+from VerbNet take place, either of the aforementioned numbering schemes will
+most likely fail in that the new frame will have a different number than the
+old frame. Although this may be unavoidable depending on the situation, a good
+numbering system would be robust enough to identify frames in such a way that
+simple movements would not alter a frame's identification.
+
+The manual mapping process required a couple of tools to complete efficiently.
+The first was the Inspector running in verb-frame pair mode.  The Inspector can
+enumerate every verb-frame pair, along with the semantics and example(s) for
+each, for a specified class. The second was a small, custom application whose
+responsibility was to display any and all desired Cyc rules.  This tool shall
+be referred to as CRule.  The command line arguments of CRule included any
+number of verbs or rule numbers.  If a VST rule was number N in the Cyc file,
+where N was a rule number specified on the command line, or had verb V, where V
+was a verb specified on the command line, the VST rule was printed.  An example
+of using this tool is
+
+   java CRule 288 647 chase catch
+
+It operated on a Cyc rule file in the format equal to the Cyc rule file
+provided in the VxC download or on the VxC results page.  The last tool used
+was the Cyc Knowledge Browser itself when the semantics defined by a predicate
+in a VST rule was ambiguous or not obvious.
+
+In the match section there is a list of classes and subclasses have been
+covered in this manual mapping.  Each such class or subclass has had every
+naive match analyzed.  Every class or subclass is completely analyzed, there
+are no partially analyzed classes or subclasses.  This is important for the VxC
+system.  This section has three types of classes or subclasses:
+   1.  A VN class/subclass has zero naive matches
+   2.  A VN class/subclass had some naive matches but didn't have any actual
+       matches
+   3.  A VN class/subclass had some naive matches and some actual matches
+Currently in this file there are classes only from groups #1 and #3.  Those
+from group #1 contain a note to that effect.  This section of elements is read
+in explicitly by the VxC system so it knows what classes or subclasses are
+covered by this manual mapping file.
+
+Here are the the final results of the mapping.  The first column is the
+top-level class analyzed.  The ssecond column is the number of naive matches
+created between the class's verb-frame pairs and the Cyc verbSemTrans rules.
+The third column is the number of matches that remained after they had been
+analyzed by an annotator with English fluency.  These are the number of actual
+matches. The fourth column is just the total number of classes and subclasses
+contained in the top-level class.  The last column is the number of verbs
+contained in the top-level class and its subclasses.
+
+     Naive Match Count -> Manual Match Count (Actual Match Count)
+  Class                       TOTCLS  TOT VERBS COVERED BY THESE (SUB)CLASSES
+  accompany-51.7:   18 -> 11    1        7
+  avoid-52:         12 ->  4    1       10
+  banish-10.2:      27 ->  8    1        7
+  calve-28:          2 ->  2    1       10
+  chase-51.6:       21 -> 12    1        7
+  coil-9.6:        116 -> 32    2       10
+  continue-55.3:    45 ->  7    1        1
+  defend-85:        12 -> 12    1        4
+  devour-39.4:      14 ->  4    3        5
+  enforce-63:        2 ->  2    1        2
+  grow-26.2:        24 -> 10    1        5
+  hold-15.1:        42 -> 17    2        7
+  hunt-35.1:        54 -> 13    1        7
+  mine-10.9:         6 ->  1    1        2
+  withdraw-82:       8 ->  4    4       12
+  ==========================================
+  15 classes       403 -> 139  22       96
+
+  The 139 actual matches include "maybe" matches: 81 GOOD, 58 MAYBE.
+
+  Approximately 20.0% to 34.4% of the naive matches are actual matches.
+
+Finally, the $ symbols below just indicate a Cyc verbSemTrans rule which
+contained some non-standard formatting or predciate.  These are basically just
+to remember where inconsistencies existed in the rules.
+
+-->
+
+<!DOCTYPE verbnet-cyc_MappingData [
+  <!ELEMENT verbnet-cyc_MappingData (tuple|tuple-m|vnclass)*>
+  <!ELEMENT tuple (#PCDATA)>
+  <!ELEMENT tuple-m (#PCDATA)>
+  <!ELEMENT vnclass (#PCDATA)>
+
+  <!ATTLIST verbnet-cyc_MappingData date CDATA #IMPLIED>
+  <!ATTLIST verbnet-cyc_MappingData vn-version CDATA #IMPLIED>
+  <!ATTLIST verbnet-cyc_MappingData cyc-version CDATA #IMPLIED>
+
+  <!-- GOOD MATCHES -->
+  <!ATTLIST tuple vnc   CDATA #REQUIRED>     <!-- VN CLASS -->
+  <!ATTLIST tuple vnm   CDATA #REQUIRED>     <!-- VN MEMBER -->
+  <!ATTLIST tuple vnf   CDATA #REQUIRED>     <!-- VN FRAME -->
+  <!ATTLIST tuple crule CDATA #REQUIRED>     <!-- CYC RULE # -->
+  <!ATTLIST tuple nts   CDATA #REQUIRED>     <!-- NOTES -->
+  <!ATTLIST tuple pr    CDATA #IMPLIED>      <!-- CYC PREPOSITION -->
+
+  <!-- MAYBE MATCHES tuple-m = tuple-maybe -->
+  <!ATTLIST tuple-m vnc   CDATA #REQUIRED>     <!-- VN CLASS -->
+  <!ATTLIST tuple-m vnm   CDATA #REQUIRED>     <!-- VN MEMBER -->
+  <!ATTLIST tuple-m vnf   CDATA #REQUIRED>     <!-- VN FRAME -->
+  <!ATTLIST tuple-m crule CDATA #REQUIRED>     <!-- CYC RULE # -->
+  <!ATTLIST tuple-m nts   CDATA #REQUIRED>     <!-- NOTES -->
+  <!ATTLIST tuple-m pr    CDATA #IMPLIED>      <!-- CYC PREPOSITION -->
+
+  <!ATTLIST vnclass ID  CDATA #REQUIRED>    <!-- A VN CLASS INCLUDED IN THIS MAPPING -->
+  <!ATTLIST vnclass nts CDATA #IMPLIED>     <!-- A VN CLASS INCLUDED IN THIS MAPPING -->
+]>
+
+<!-- ((SECTION #1)) -->
+
+<verbnet-cyc_MappingData date='2006.11.20' vn-version='2.1' cyc-version='1.0rc13'>
+
+<vnclass ID='accompany-51.7' />
+<vnclass ID='avoid-52' />
+<vnclass ID='banish-10.2' />
+<vnclass ID='calve-28' />
+<vnclass ID='chase-51.6' />
+<vnclass ID='coil-9.6' />
+<vnclass ID='coil-9.6-1' />
+<vnclass ID='continue-55.3' />
+<vnclass ID='defend-85' />
+<vnclass ID='devour-39.4' nts='no naive matches' />
+<vnclass ID='devour-39.4-1' />
+<vnclass ID='devour-39.4-2' />
+<vnclass ID='enforce-63' />
+<vnclass ID='grow-26.2' />
+<vnclass ID='hold-15.1' nts='no naive matches' />
+<vnclass ID='hold-15.1-1' />
+<vnclass ID='hunt-35.1' />
+<vnclass ID='mine-10.9' />
+<vnclass ID='withdraw-82' nts='no naive matches' />
+<vnclass ID='withdraw-82-1' nts='no naive matches' />
+<vnclass ID='withdraw-82-2' nts='no naive matches' />
+<vnclass ID='withdraw-82-3' />
+
+<tuple   vnc='accompany-51.7' vnm='conduct' vnf='f1;Basic Transitive' crule='3092' nts='OS in same pred;noA#1' />
+<tuple-m vnc='accompany-51.7' vnm='conduct' vnf='f1;Basic Transitive' crule='2733' nts='music' />
+<tuple   vnc='accompany-51.7' vnm='conduct' vnf='f2;NP-PP // path-PP' crule='3092' nts='OS in same pred;noA#1' />
+<tuple   vnc='accompany-51.7' vnm='escort' vnf='f1;Basic Transitive' crule='1433' nts='AOS in same pred#2' />
+<tuple   vnc='accompany-51.7' vnm='escort' vnf='f2;NP-PP // path-PP' crule='1433' nts='AOS in same pred#2' />
+<tuple   vnc='accompany-51.7' vnm='guide' vnf='f1;Basic Transitive' crule='1492' nts='#3' />
+<tuple   vnc='accompany-51.7' vnm='guide' vnf='f2;NP-PP // path-PP' crule='1492' nts='#3' />
+<tuple   vnc='accompany-51.7' vnm='lead' vnf='f1;Basic Transitive' crule='2749' nts='#3' />
+<tuple   vnc='accompany-51.7' vnm='lead' vnf='f2;NP-PP // path-PP' crule='2749' nts='#3' />
+<tuple-m vnc='accompany-51.7' vnm='steer' vnf='f1;Basic Transitive' crule='1925' nts='cyc specifies "device"#4' />
+<tuple-m vnc='accompany-51.7' vnm='steer' vnf='f2;NP-PP // path-PP' crule='1925' nts='cyc specifies "device"#4' />
+<tuple-m vnc='avoid-52' vnm='avoid' vnf='f3;ING-SC/BE-ING/SC' crule='797' nts='weird pred#5' />
+<tuple-m vnc='avoid-52' vnm='avoid' vnf='f3;ING-SC/BE-ING/SC' crule='2424' nts='weird pred#6' />
+<tuple-m vnc='avoid-52' vnm='boycott' vnf='f1;Basic Transitive // Location Object' crule='119' nts='#7' />
+<tuple   vnc='avoid-52' vnm='boycott' vnf='f2;Basic Transitive // Theme Object' crule='119' nts='#7' />
+<tuple-m vnc='banish-10.2' vnm='expel' vnf='f2;NP-PP // Source-PP' crule='514' nts='doesnt match f1 or f3 cause it requires "From"#8' pr='From' />
+<tuple   vnc='banish-10.2' vnm='extradite' vnf='f1;Basic Transitive' crule='388' nts='matches all 3 cause it doesnt specifiy prep#9' />
+<tuple   vnc='banish-10.2' vnm='extradite' vnf='f2;NP-PP // Source-PP' crule='388' nts='matches all 3 cause it doesnt specifiy prep#9' />
+<tuple   vnc='banish-10.2' vnm='extradite' vnf='f3;NP-PP // Destination-PP' crule='388' nts='matches all 3 cause it doesnt specifiy prep#9' />
+<tuple-m vnc='banish-10.2' vnm='remove' vnf='f1;Basic Transitive' crule='1043' nts='discard trash#10' />
+<tuple-m vnc='banish-10.2' vnm='remove' vnf='f2;NP-PP // Source-PP' crule='1043' nts='discard trash#10' />
+<tuple-m vnc='banish-10.2' vnm='remove' vnf='f3;NP-PP // Destination-PP' crule='1043' nts='discard trash#10' />
+<tuple-m vnc='banish-10.2' vnm='remove' vnf='f2;NP-PP // Source-PP' crule='3034' nts='think cyc is mary removed kid FROM danger#11' pr='From' />
+<tuple   vnc='calve-28' vnm='calve' vnf='f1;Basic Intransitive' crule='1478' nts='applies just to cows#42' />
+<tuple   vnc='calve-28' vnm='calve' vnf='f1;Basic Intransitive' crule='3206' nts='general object of state change#43' />
+<tuple   vnc='chase-51.6' vnm='chase' vnf='f1;Basic Transitive' crule='2245' nts='#15' />
+<tuple   vnc='chase-51.6' vnm='chase' vnf='f2;NP-PP // path-PP' crule='2245' nts='#15' />
+<tuple-m vnc='chase-51.6' vnm='chase' vnf='f3;PP // after-PP' crule='2245' nts='verbnet requires "After" preposition#15' />
+<tuple   vnc='chase-51.6' vnm='follow' vnf='f1;Basic Transitive' crule='1451' nts='#16' />
+<tuple   vnc='chase-51.6' vnm='follow' vnf='f2;NP-PP // path-PP' crule='1451' nts='#16' />
+<tuple-m vnc='chase-51.6' vnm='follow' vnf='f3;PP // after-PP' crule='1451' nts='verbnet requires "After" prep#16' />
+<tuple-m vnc='chase-51.6' vnm='pursue' vnf='f1;Basic Transitive' crule='1302' nts='cyc specifies pursue "Enemy"#17' />
+<tuple-m vnc='chase-51.6' vnm='pursue' vnf='f2;NP-PP // path-PP' crule='1302' nts='cyc specifies pursue "Enemy"#17' />
+<tuple-m vnc='chase-51.6' vnm='pursue' vnf='f3;PP // after-PP' crule='1302' nts='verbnet requires "After" prep,cyc specifies pursue "Enemy"#17' />
+<tuple   vnc='chase-51.6' vnm='track' vnf='f1;Basic Transitive' crule='2462' nts='#18' />
+<tuple   vnc='chase-51.6' vnm='track' vnf='f2;NP-PP // path-PP' crule='2462' nts='#18' />
+<tuple-m vnc='chase-51.6' vnm='track' vnf='f3;PP // after-PP' crule='2462' nts='verbnet requires "After" prep#18' />
+<tuple-m vnc='coil-9.6' vnm='loop' vnf='f1;NP-PP // path-PP' crule='1847' nts='cyc probably means INTO resultant shape, not location#19' pr='Into' />
+<tuple   vnc='coil-9.6' vnm='roll' vnf='f2;PP // path-PP' crule='2043' nts='ok since cyc doesnt specify prep#20' />
+<tuple   vnc='coil-9.6' vnm='roll' vnf='f3;Middle Construction' crule='2043' nts='ok since this rule only adds ADV, which can move around in Eng#20' />
+<tuple   vnc='coil-9.6' vnm='roll' vnf='f2;PP // path-PP' crule='2514' nts='ok since cyc doesnt specify prep#21' />
+<tuple   vnc='coil-9.6' vnm='roll' vnf='f3;Middle Construction' crule='2514' nts='ok since this rule only adds ADV, which can move around in Eng#21' />
+<tuple   vnc='coil-9.6' vnm='spin' vnf='f2;PP // path-PP' crule='206' nts='ok because doesnt specify a prep like VN does#22' />
+<tuple   vnc='coil-9.6' vnm='spin' vnf='f3;Middle Construction' crule='206' nts='ok because doesnt specify prep or ADV#22' />
+<tuple   vnc='coil-9.6' vnm='spin' vnf='f2;PP // path-PP' crule='915' nts='ok because doesnt specify a prep like VN does#23' />
+<tuple   vnc='coil-9.6' vnm='spin' vnf='f3;Middle Construction' crule='915' nts='ok because doesnt specify prep or ADV#23' />
+<tuple   vnc='coil-9.6' vnm='spin' vnf='f2;PP // path-PP' crule='1010' nts='ok because doesnt specify a prep like VN does#24' />
+<tuple   vnc='coil-9.6' vnm='spin' vnf='f3;Middle Construction' crule='1010' nts='ok because doesnt specify prep or ADV#24' />
+<tuple   vnc='coil-9.6' vnm='spin' vnf='f1;NP-PP // path-PP' crule='2784' nts='ok because doesnt specify prep like VN does#25' />
+<tuple-m vnc='coil-9.6' vnm='whirl' vnf='f2;PP // path-PP' crule='1016' nts='ok because doesnt specify a prep like VN does;pertains to fluid tho#26' />
+<tuple-m vnc='coil-9.6' vnm='whirl' vnf='f3;Middle Construction' crule='1016' nts='ok because doesnt specify prep or ADV;pertains to fluid tho#26' />
+<tuple   vnc='coil-9.6' vnm='whirl' vnf='f2;PP // path-PP' crule='1228' nts='ok because doesnt specify a prep like VN does#27' />
+<tuple   vnc='coil-9.6' vnm='whirl' vnf='f3;Middle Construction' crule='1228' nts='ok because doesnt specify prep or ADV#27' />
+<tuple-m vnc='coil-9.6' vnm='whirl' vnf='f2;PP // path-PP' crule='2948' nts='ok because doesnt specify a prep like VN does;pertains to fluid tho#28' />
+<tuple-m vnc='coil-9.6' vnm='whirl' vnf='f3;Middle Construction' crule='2948' nts='ok because doesnt specify prep or ADV;pertains to fluid tho#28' />
+<tuple   vnc='coil-9.6' vnm='whirl' vnf='f2;PP // path-PP' crule='3201' nts='ok because doesnt specify a prep like VN does#29' />
+<tuple   vnc='coil-9.6' vnm='whirl' vnf='f3;Middle Construction' crule='3201' nts='ok because doesnt specify prep or ADV#29' />
+<tuple-m vnc='coil-9.6' vnm='wind' vnf='f1;NP-PP // path-PP' crule='1677' nts='cyc prolly means INTO resultant shape, not location#30' pr='Into' />
+<tuple-m vnc='coil-9.6' vnm='wind' vnf='f1;NP-PP // path-PP' crule='3163' nts='cyc prolly means INTO resultant shape, not location#31' pr='Into' />
+<tuple-m vnc='coil-9.6-1' vnm='curl' vnf='f1;NP-PP // path-PP' crule='2278' nts='cyc prolly means INTO resultant shape, not location#32' pr='Into' />
+<tuple-m vnc='coil-9.6-1' vnm='coil' vnf='f1;NP-PP // path-PP' crule='64' nts='cyc prolly means INTO resultant shape, not location#33' pr='Into' />
+<tuple-m vnc='coil-9.6-1' vnm='coil' vnf='f1;NP-PP // path-PP' crule='1343' nts='cyc prolly means INTO resultant shape, not location#34' pr='Into' />
+<tuple   vnc='coil-9.6-1' vnm='twirl' vnf='f2;PP // path-PP' crule='2170' nts='ok because doesnt specify a prep like VN does#35' />
+<tuple   vnc='coil-9.6-1' vnm='twirl' vnf='f3;Middle Construction' crule='2170' nts='ok because doesnt specify prep or ADV#35' />
+<tuple   vnc='coil-9.6-1' vnm='twirl' vnf='f4;Middle Construction' crule='2170' nts='ok because doesnt specify ADV#35' />
+<tuple   vnc='coil-9.6-1' vnm='twirl' vnf='f2;PP // path-PP' crule='2230' nts='ok because doesnt specify a prep like VN does#36' />
+<tuple   vnc='coil-9.6-1' vnm='twirl' vnf='f3;Middle Construction' crule='2230' nts='ok because doesnt specify prep or ADV#36' />
+<tuple   vnc='coil-9.6-1' vnm='twirl' vnf='f4;Middle Construction' crule='2230' nts='ok because doesnt specify ADV#36' />
+<tuple-m vnc='coil-9.6-1' vnm='twist' vnf='f1;NP-PP // path-PP' crule='1226' nts='cyc prolly means INTO resultant shape, not location#37' pr='Into' />
+<tuple   vnc='continue-55.3' vnm='continue' vnf='f1;TO-INF-RS' crule='1069' nts='infinitive clause/volitional#38' />
+<tuple   vnc='continue-55.3' vnm='continue' vnf='f3;Unspecified Object' crule='272' nts='volitional#39' />
+<tuple   vnc='continue-55.3' vnm='continue' vnf='f5;PP // Time-PP' crule='272' nts='volitional with added VN prep#39' />
+<tuple   vnc='continue-55.3' vnm='continue' vnf='f2;Intransitive // Inchoative' crule='102' nts='non-volitional#40' />
+<tuple   vnc='continue-55.3' vnm='continue' vnf='f4;PP // Time-PP' crule='102' nts='non-volitional with added VN prep#40' />
+<tuple   vnc='continue-55.3' vnm='continue' vnf='f2;Intransitive // Inchoative' crule='2074' nts='non-volitional#41' />
+<tuple   vnc='continue-55.3' vnm='continue' vnf='f4;PP // Time-PP' crule='2074' nts='non-volitional with added VN prep#41' />
+<tuple   vnc='defend-85' vnm='defend' vnf='f1;Basic Transitive' crule='1003' nts='cyc specifies no prep, can defend Theme against attk#44' />
+<tuple   vnc='defend-85' vnm='defend' vnf='f2;NP-PP // against-PP' crule='1003' nts='cyc specifies no prep, can defend Theme against attk#44' />
+<tuple   vnc='defend-85' vnm='defend' vnf='f3;ING-AC' crule='1003' nts='cyc specifies no prep, can defend Proposition against attk#44' />
+<tuple   vnc='defend-85' vnm='defend' vnf='f4;POSSING' crule='1003' nts='cyc specifies no prep, can defend Proposition against attk#44' />
+<tuple   vnc='defend-85' vnm='defend' vnf='f1;Basic Transitive' crule='2930' nts='ok cause cyc specifies no prep#45' />
+<tuple   vnc='defend-85' vnm='defend' vnf='f2;NP-PP // against-PP' crule='2930' nts='ok cause cyc specifies no prep#45' />
+<tuple-m vnc='defend-85' vnm='defend' vnf='f3;ING-AC' crule='2930' nts='a little more abstract, can one protect a proposition??#45' />
+<tuple-m vnc='defend-85' vnm='defend' vnf='f4;POSSING' crule='2930' nts='a little more abstract, can one protect a proposition??#45' />
+<tuple   vnc='defend-85' vnm='protect' vnf='f1;Basic Transitive' crule='894' nts='ok cause cyc specifies no prep#46' />
+<tuple   vnc='defend-85' vnm='protect' vnf='f2;NP-PP // against-PP' crule='894' nts='ok cause cyc specifies no prep#46' />
+<tuple-m vnc='defend-85' vnm='protect' vnf='f3;ING-AC' crule='894' nts='a little more abstract, can one protect a proposition??#46' />
+<tuple-m vnc='defend-85' vnm='protect' vnf='f4;POSSING' crule='894' nts='a little more abstract, can one protect a proposition??#46' />
+<tuple   vnc='devour-39.4-1' vnm='consume' vnf='f1;Basic Transitive' crule='106' nts='VN take_in semantic/Cyc consumedObject#47' />
+<tuple   vnc='devour-39.4-1' vnm='ingest' vnf='f1;Basic Transitive' crule='1263' nts='VN take_in semantic/Cyc Ingesting#48' />
+<tuple   vnc='devour-39.4-2' vnm='imbibe' vnf='f1;Basic Transitive' crule='758' nts='VN take_in semantic/Cyc consumedObject#49' />
+<tuple   vnc='devour-39.4-2' vnm='swill' vnf='f1;Basic Transitive' crule='81' nts='VN take_in semantic/Cyc consumedObject#50' />
+<tuple   vnc='enforce-63' vnm='enforce' vnf='f1;NP' crule='835' nts='"enforce the policy"--why risk tho#55' />
+<tuple-m vnc='enforce-63' vnm='enforce' vnf='f2;S' crule='835' nts='cyc might need different rule structure to have object as "that_comp"#55' />
+<tuple-m vnc='grow-26.2' vnm='develop' vnf='f2;Material/Product Alternation Intransitive // Product Subject' crule='2392' nts='cyc kinda vague#61' />
+<tuple   vnc='grow-26.2' vnm='develop' vnf='f3;NP-PP // Causative variant, Material-PP' crule='2644' nts='cyc means commercial product but its ok#62' />
+<tuple-m vnc='grow-26.2' vnm='evolve' vnf='f1;Material/Product Alternation Intransitive // Material Subject' crule='1608' nts='is sbj of V material?#63' />
+<tuple-m vnc='grow-26.2' vnm='evolve' vnf='f2;Material/Product Alternation Intransitive // Product Subject' crule='1608' nts='is sbj of V product?#63' />
+<tuple-m vnc='grow-26.2' vnm='grow' vnf='f1;Material/Product Alternation Intransitive // Material Subject' crule='3040' nts='is sbj of V material?#64' />
+<tuple-m vnc='grow-26.2' vnm='grow' vnf='f2;Material/Product Alternation Intransitive // Product Subject' crule='3040' nts='is sbj of V product?#64' />
+<tuple-m vnc='grow-26.2' vnm='grow' vnf='f3;NP-PP // Causative variant, Material-PP' crule='2794' nts='is object seed or plant?#65' />
+<tuple-m vnc='grow-26.2' vnm='grow' vnf='f4;NP-PP // Causative variant, Product-PP' crule='2794' nts='is object seed or plant?#65' />
+<tuple-m vnc='grow-26.2' vnm='mature' vnf='f1;Material/Product Alternation Intransitive // Material Subject' crule='607' nts='is sbj of V material?#66' />
+<tuple-m vnc='grow-26.2' vnm='mature' vnf='f2;Material/Product Alternation Intransitive // Product Subject' crule='607' nts='is sbj of V product?#66' />
+<tuple   vnc='hold-15.1-1' vnm='grasp' vnf='f2;NP-PP // Body-part-PP' crule='433' nts='#56' pr='By' />
+<tuple   vnc='hold-15.1-1' vnm='grip' vnf='f2;NP-PP // Body-part-PP' crule='2093' nts='#56' pr='By' />
+<tuple   vnc='hold-15.1-1' vnm='handle' vnf='f1;Basic Transitive' crule='639' nts='#57' />
+<tuple   vnc='hold-15.1-1' vnm='handle' vnf='f2;NP-PP // Body-part-PP' crule='639' nts='ok cause cyc doesnt specify prep "by"#57' />
+<tuple   vnc='hold-15.1-1' vnm='handle' vnf='f3;Transitive // Body-part Object' crule='639' nts='#57' />
+<tuple-m vnc='hold-15.1-1' vnm='handle' vnf='f1;Basic Transitive' crule='2109' nts='animal handling' />
+<tuple-m vnc='hold-15.1-1' vnm='handle' vnf='f2;NP-PP // Body-part-PP' crule='2109' nts='animal handling' />
+<tuple-m vnc='hold-15.1-1' vnm='handle' vnf='f3;Transitive // Body-part Object' crule='2109' nts='animal handling' />
+<tuple   vnc='hold-15.1-1' vnm='hold' vnf='f1;Basic Transitive' crule='1582' nts='#58' />
+<tuple   vnc='hold-15.1-1' vnm='hold' vnf='f2;NP-PP // Body-part-PP' crule='1582' nts='ok cause cyc doesnt specify prep "by"#58' />
+<tuple   vnc='hold-15.1-1' vnm='hold' vnf='f3;Transitive // Body-part Object' crule='1582' nts='#58' />
+<tuple   vnc='hold-15.1-1' vnm='hold' vnf='f1;Basic Transitive' crule='3025' nts='#59' />
+<tuple   vnc='hold-15.1-1' vnm='hold' vnf='f2;NP-PP // Body-part-PP' crule='3025' nts='ok cause cyc doesnt specify prep "by"#59' />
+<tuple   vnc='hold-15.1-1' vnm='hold' vnf='f3;Transitive // Body-part Object' crule='3025' nts='#59' />
+<tuple-m vnc='hold-15.1-1' vnm='hold' vnf='f1;Basic Transitive' crule='1811' nts='held captive works depending on situation#60' />
+<tuple-m vnc='hold-15.1-1' vnm='hold' vnf='f2;NP-PP // Body-part-PP' crule='1811' nts='held captive works depending on situation#60' />
+<tuple-m vnc='hold-15.1-1' vnm='hold' vnf='f3;Transitive // Body-part Object' crule='1811' nts='held captive works depending on situation#60' />
+<tuple-m vnc='hunt-35.1' vnm='fish' vnf='f2;PP-PP // Theme-PP Location-PP' crule='2405' nts='VN is intrans, spec. obj thru "for" prep, i think ok#51' />
+<tuple-m vnc='hunt-35.1' vnm='fish' vnf='f3;PP // Location-PP Theme-PP' crule='2405' nts='VN is intrans, spec. obj thru "for" prep, i think ok#51' />
+<tuple   vnc='hunt-35.1' vnm='fish' vnf='f6;Basic Intransitive' crule='2405' nts='#51' />
+<tuple-m vnc='hunt-35.1' vnm='hunt' vnf='f2;PP-PP // Theme-PP Location-PP' crule='142' nts='VN is intrans, spec. obj thru "for" prep, i think ok#52' />
+<tuple-m vnc='hunt-35.1' vnm='hunt' vnf='f3;PP // Location-PP Theme-PP' crule='142' nts='VN is intrans, spec. obj thru "for" prep, i think ok#52' />
+<tuple   vnc='hunt-35.1' vnm='hunt' vnf='f6;Basic Intransitive' crule='142' nts='#52' />
+<tuple-m vnc='hunt-35.1' vnm='mine' vnf='f4;NP-PP // Location-PP' crule='1086' nts='maybe because from is? in {{+loc}}' />
+<tuple   vnc='hunt-35.1' vnm='mine' vnf='f1;NP-PP // Theme-PP' crule='2832' nts='added, vn transitive' />
+<tuple   vnc='hunt-35.1' vnm='mine' vnf='f4;NP-PP // Location-PP' crule='2832' nts='ok cause cyc doesnt spec prep, vn adds loc prep#53' />
+<tuple   vnc='hunt-35.1' vnm='mine' vnf='f5;Basic Transitive' crule='2832' nts='#53' />
+<tuple-m vnc='hunt-35.1' vnm='poach' vnf='f2;PP-PP // Theme-PP Location-PP' crule='876' nts='VN is intrans, spec. obj thru "for" prep, i think ok#54' />
+<tuple-m vnc='hunt-35.1' vnm='poach' vnf='f3;PP // Location-PP Theme-PP' crule='876' nts='VN is intrans, spec. obj thru "for" prep, i think ok#54' />
+<tuple   vnc='hunt-35.1' vnm='poach' vnf='f6;Basic Intransitive' crule='876' nts='#54' />
+<tuple   vnc='mine-10.9' vnm='mine' vnf='f2;PP // source-PP' crule='1086' nts='mine from somewhere#67' pr='From' />
+<tuple-m vnc='withdraw-82-3' vnm='withdraw' vnf='f2;PP // from-PP' crule='2550' nts='cyc is military#12;f1 does not have "From" spec.' pr='From' />
+<tuple   vnc='withdraw-82-3' vnm='retreat' vnf='f2;PP // from-PP' crule='10' nts='#13;f1 does not have "From" spec.' pr='From' />
+<tuple-m vnc='withdraw-82-3' vnm='retire' vnf='f1;Basic Intransitive' crule='2007' nts='cyc is retiring from job: Mark retired.#14' />
+<tuple-m vnc='withdraw-82-3' vnm='retire' vnf='f2;PP // from-PP' crule='2007' nts='cyc is retiring from job: Mark retired.can CycJob=VNLocation?#14' />
+
+</verbnet-cyc_MappingData>
+
+<!--
+
+((SECTION #2))
+
+Extra notes #? (O=Object, S=Subject, A=Action, G=Gerund, OBL=Oblique)
+These notes are to record important lexical items from the cyc rule,
+ones that might lead to highlighting further automation opportunities.
+(NOTE: Could do some form of frequency correlation with VerbNet sem predicates on these)
+==========================================================================
+1  directingAgent OS $
+2  accompaniedBy AOS, EscortingSomeone A $
+3  GuidingAMovingObject A, directingAgent S A, primaryObjectMoving O
+4  SteeringADeviceByHand A, performedBy S, objectControlled O
+5  avoidsRoleInEventType S, doneBy G
+6  dislikesRoleInEventType S, performedBy G
+7  Boycott-Economic, performedBy S, objectActedOn O
+8  ExpellingFromStatus A, transferredObject O, from-Generic OBL, doneBy S
+9  Extradition A, performedBy S, transferredObject O
+10 ThrowingSomethingAway A, objectOfPossessionTransfer O, fromPossessor S
+11 RemovingSomething A, ObjectOfStateChange OBL, doneBy S, objectRemoved O
+12 MilitaryWithdrawal A, fromLocation OBL, doneBy S
+13 RetreatingFromAnArea A, fromLocation OBL, doneBy S
+14 RetirementEvent A, doneBy S
+15 PursuingSomething A, objectPursued O, pursuingAgent S
+16 MovementEvent A, objectMoving S, objectFollowedInMovement O
+17 PursuingAnEnemy A, objectPursued O, performedBy S
+18 TrackingAnObject A, performedBy S, objectActedOn O
+19 WindingProcess A, doneBy S, inputsCommitted O, outputsCreated OBL, Cyc prolly means: "John looped the rope into a circle"
+20 RollingOnASurface A, objectMoving S $ (why differentiate?)   good intransitive match
+21 RollingOnASurface A, primaryObjectMoving S $ (why differentiate?)   good intransitive match
+22 Movement-Rotation A, objectMoving S
+23 MultirevolutionRotation A, primaryObjectMoving S  ($ why differentiate between Movement-Rotation and MultirevolutionRotation?, oM & pOM?)
+24 MultirevolutionRotation A, objectMoving S
+25 Movement-Rotation A, primaryObjectMoving O, doneBy S
+26 WhirlingOfFluid A, primaryObjectMoving S   ($ oM & pOM?)  - all these are intransitive
+27 PartialRotation A, primaryObjectMoving S   ($ oM & pOM?)
+28 WhirlingOfFluid A, objectMoving S   ($ oM & pOM?)
+29 PartialRotation A, objectMoving S   ($ oM & pOM?)
+30 CoilTightening A, inputsCommitted O, outputsCreated OBL, doneBy S
+31 WindingProcess A, inputsCommitted O, outputsCreated OBL, doneBy S
+32 CoilTightening A, inputsCommitted O, outputsCreated OBL, doneBy S
+33 WindingProcess A, inputsCommitted O, outputsCreated OBL, doneBy S
+34 CoilTightening A, inputsCommitted O, outputsCreated OBL, doneBy S
+35 SpinLikeATop A, objectMoving S ($ oM & pOM?)
+36 SpinLikeATop A, primaryObjectMoving S ($ oM & pOM?)
+37 WindingProcess A, inputsCommitted O, outputsCreated OBL, doneBy S
+38 Continuation A, doneBy S, INF-COMP, subEvents INF-COMP A
+39 Continuation A, performedBy S
+40 TemporallyExistingThing S
+41 Continuation A, subEvents SUBJECT ACTION
+42 BirthEvent A, Cow S, birthParent S    ($ here Cyc uses an isa to show the SUBJECT??)
+43 BirthEvent A, objectOfStateChange S
+44 DefendingSomethingAgainstAttack A, performedBy S, objectActedOn O (note: lex item "Against" included in constant name, not as preposition predicate)
+45 ProtectingSomething A, performedBy S, objectProtected O
+46 ProtectionSituation A, protector-Generic S, thingProtected-Generic O
+47 ConsumingFoodOrDrink A, perfomedBy S, consumedObject O (performedBy of course matches with Agent again, take_in() with consumedObject)
+48 Ingesting A, doneBy S, objectActedOn O
+49 DrinkingEvent A, performedBy S, consumedObject O
+50 DrinkingEvent A, performedBy S, consumedObject O
+51 Fishing A, performedBy S
+52 Hunting A, performedBy S
+53 Mining A, doneBy S, objectOfStateChange O
+54 Poaching A, performedBy S
+55 EnforcingSomething A, performedBy S, enforcementOf O
+56 HoldingWithHand A, objectActedOn A OBL, physicalParts O OBL, doneBy S
+57 HandlingAnObject A, performedBy S, objectControlled O
+58 HoldingAnObject A, performedBy S, objectActedOn O
+59 HoldingWithHand A, performedBy S, objectActedOn O
+60 HeldCaptive A, captor S, captive O
+61 outputsCreated A S  ($ this is all there is for this rule!!)
+62 DevelopingAProduct A, performedBy S, products O
+63 IntrinsicStateChangeEvent A, objectOfStateChange S ($kinda vague...)
+64 GrowthEvent A, objectOfStateChange S ($kinda vague...)
+65 HusbandryOfPlant A, performedBy S, objectActedOn O ($ vague is O seed or plant in this "Husbandry" - KB doesn't say)
+66 BiologicalMaturationEvent A, objectOfStateChange O
+67 Mining A, objectOfStateChange OBL, doneBy S, objectRemoved O
+
+$ good example where Cyc vague - HusbandryOfPlant has an objectActedOn predicate, but is this object the seed or the plant?
+
+((SECTION #3))
+
+"Why I discounted a rule" section (very important to use when trying to eliminate naive matches)
+===============================
+
+accompany-51.7/conduct/f*/201,2863 => are IntransitiveVerbFrame's and all of VN Frames have Theme right after the V
+accompany-51.7/conduct/f*/825 => Not really sure how to discount it, deals with FluidFlow like above 2, but has O & S
+accompany-51.7/conduct/f2/2733m => Music conduct would definitely not be used in conjunction with {PREP-CLASS: +spatial}
+
+avoid-52/avoid/f1,f2,f4/797,2424 => VN clearly Location and Theme (object), Cyc is avoiding 'Role' in both cases
+avoid-52/boycott/f1,f3,f4/119 => Cyc only talks about economic boycott, so f2 with Theme Object seem to be only one to match
+
+banish-10.2/evacuate/f*/1273,2390 => Cyc's O is location, whereas VN's is a Theme (not Location)
+banish-10.2/expel/f*/1112,1663 => Cyc has emitting an object.  The ship expelled exhaust.  VN does not imply this sense.
+banish-10.2/expel/f*/1853 => In Cyc The Location is the subject of the expelling (the country expelled the rebels).
+banish-10.2/expel/f1,f3/514 => Cyc requires From preposition.
+banish-10.2/remove/f1,f3/3034 => Cyc requires From preposition (though f2 isn't a perfect match either - state of being most likely)
+
+calve-28 - no exclusions
+
+chase-51.6/follow/f*/170 $ => Cyc deals with abstract time events following one another
+chase-51.6/follow/f*/1750 => Cyc deals with following instructions (would be hard to eliminate automatically since it's the same form as 1451)
+chase-51.6/follow/f*/1994 => Cyc rule too vague to understand$
+
+coil-9.6/loop/f1/2082 => Cyc implies sense of "John looped the bracelet OUT OF string." with objectsCreated O.
+coil-9.6/loop/f2,f3/1847,2082 => Cyc implies person doing looping with doneBy, but Theme is subject in VN (middle construction)
+coil-9.6/roll/f1/2043,2514 => Cyc is all intransitive so VN f1 won't work.
+coil-9.6/spin/f*/273,476,844,1155,1358,1720,1814,2610 => All of these cyc senses refer to spinning yarn.
+coil-9.6/spin/f1/206,915,1010 => Cyc is intransitive for these rules, f1 is not
+coil-9.6/spin/f2,f3/2784 => Cyc is transitive for this rule, f2 and f3 are not
+coil-9.6/whirl/f1/1016m,1228,2948m,3201 => Cyc is intransitive for these rules, f1 is not
+coil-9.6/wind/f2,f3/1323,1431,1677,3163 => Cyc implies person doing looping with doneBy, but Theme is subject in VN (middle construction)
+coil-9.6/wind/f1/1323,1431 => Cyc implies sense of "John wound the bracelet OUT OF string." with objectsCreated O.
+coil-9.6-1/curl/f2,f3,f4/109,2278 => Cyc implies person doing looping with doneBy, but Theme is subject in VN (middle construction)
+coil-9.6-1/curl/f1/109 => Cyc implies sense of "John curled the bracelet OUT OF string." with objectsCreated O.
+coil-9.6-1/coil/f2,f3,f4/64,313,1343,2989 => Cyc implies person doing looping with doneBy, but Theme is subject in VN (middle construction)
+coil-9.6-1/coil/f1/313,2989 => Cyc implies sense of "John coiled the bracelet OUT OF string." with objectsCreated O.
+coil-9.6-1/twirl/f1/2170,2230 => Cyc is intransitive for these rules, f1 is not
+coil-9.6-1/twist/f1/2604 => Cyc implies sense of "John twisted the bracelet OUT OF string." with objectsCreated O.
+coil-9.6-1/twist/f2,f3,f4/1226,2604 => Cyc implies person doing looping with doneBy, but Theme is subject in VN (middle construction)
+coil-9.6-1/twist/f1/1625 => Cyc intransitive, f1 not
+coil-9.6-1/twist/f2,f3,f4/1625 => ???? Cyc has: "John twisted his body. (Writhing)  This is *kinda* like the VN, but I assume VN means Theme to be inanimate.
+
+continue-55.3/continue/f1/68,82,102,272,694,2074,2086,2174 => f1 requires infinitive
+continue-55.3/continue/f2-f5/1069 => Cyc rule requires infinitive
+continue-55.3/continue/f1-f5/2174 => Cyc rule requires gerund
+continue-55.3/continue/f1-f5/694,2086 => Cyc rule specifies with in 'continue with', no VN frame has such
+continue-55.3/continue/f1-f5/68,82 => Cyc rules transitive, VN is all intrans or INF
+continue-55.3/continue/f2,f4/272 => Cyc rule needs volitional subject (performedBy)
+continue-55.3/continue/f3,f5/102,2074 => Cyc rules seem to imply non-volitional, intransitive
+
+defend-85 - no exclusions
+
+devour-39.4-1/consume/f1/155,2713 => Cyc rules are intransitive, f1 is not
+devour-39.4-2/imbibe/f1/1707,2040,2491,2693 => Cyc rules are intransitive, f1 is not
+devour-39.4-2/swill/f1/765,1453,1966,2907 => Cyc rules are intransitive, f1 is not
+
+enforce-63 - no exclusions
+
+grow-26.2/develop/f1,f3,f4/2392 => Only in f2 is the subject the product/output (outputsCreated S)
+grow-26.2/develop/f1,f2,f4/2644 => Only in f3 is the object the product (products O)
+grow-26.2/evolve/f3,f4/1608 => Cyc rule has subject changing state (so the ones with Agent can't be it)
+grow-26.2/grow/f3,f4/3040 => Cyc rule has subject changing state (so the ones with Agent can't be it)
+grow-26.2/grow/f1,f2/2794 => Cyc rule has a volitional agent growing a plant, so can't be Material V nor Product V
+grow-26.2/mature/f3,f4/607 => Cyc rule has subject changing state (so the ones with Agent can't be it)
+
+hold-15.1-1/grasp/f1,f3/433 => Cyc requires prep "by"
+hold-15.1-1/grip/f1,f3/2093 => Cyc requires prep "by"
+hold-15.1-1/handle/f1-f3/2109 => Cyc has "animal handling" for this rule, not related enough to "holding something" - DISAGREE GOING TO CHANGE to maybe matches
+hold-15.1-1/hold/f1-f3/27 => Cyc's rule is synonym for "contains"
+hold-15.1-1/hold/f1-f3/1224 => Cyc's rule is "Sarah holds him down" - VN would have specified ADJ or other if it wanted to allow this
+hold-15.1-1/hold/f1-f3/1613 => Cyc rule is vauge
+hold-15.1-1/hold/f1-f3/1850 => Cyc's rule is "hold in a given state", and VN semantics use contact() which to me means physical
+hold-15.1-1/hold/f1-f3/1914 => Cyc's rule is for "He holds that the earth is the center of the solar system."
+hold-15.1-1/hold/f1-f3/2084 => Cyc's rule is "hold the castle until dawn"
+hold-15.1-1/hold/f1-f3/3167 => Cyc's rule is "hold authoratative control over", and VN semantics use contact() which to me means physical
+
+hunt-35.1/feel/f1-f6/1268 => Cyc is complete emotion (feel happy), VN is *looking for something* in this class
+hunt-35.1/fish/f1,f4,f5/2405 => Cyc is intransitive, f1,f4,f5 are not
+hunt-35.1/hunt/f1,f4,f5/142 => Cyc is intransitive, f1,f4,f5 are not
+hunt-35.1/mine/f1-f3,f5,f6/1086 => Cyc requires From preposition "to mine from the mountainside", VN does not have "from" or has preposition before direct object.
+hunt-35.1/mine/f2,f3,f6/2832 => Cyc transitive, only f1, f4, and f5 transitive
+hunt-35.1/mine/f1-f6/2057 => Even though I don't understand the Cyc necessarily, it is Middle Voice, with objectOfStateChange as subject of verb mine, VN class clearly has agent (state-changer) as subject
+hunt-35.1/poach/f1-f6/2080,2635 => refers to food
+hunt-35.1/poach/f1,f4,f5/876 => Cyc is intransitive, f1,f4,f5 are not
+
+mine-10.9/mine/f1/1086 => Cyc requires prep from
+mine-10.9/mine/f1,f2/2057 => Cyc rule is middle voice, not transitive like VN
+mine-10.9/mine/f1,f2/2832 => Cyc's object is the hillside, whereas VN's object is always the gold.
+
+withdraw-82-3/withdraw/f1/2550m => Cyc requires From preposition (military one).
+withdraw-82-3/retreat/f1/10 => Cyc requires From preposition.
+withdraw-82-3/retire/f*/288 => Cyc deals with retiring in stock market sense, it's frame=TransitiveNPFrame and VN has no object after V (even better)
+
+-->

@@ -1,0 +1,24 @@
+
+################
+## Run Script ##
+################
+
+# This script runs the UVIG tool.
+#
+# This script is similar to the 'run-uvig' script, but it has
+# specific arguments for re-generating the UVI from the
+# most recent VerbNet files or an arbitrary input directory
+# into a temporary directory in the user's public web area.
+
+mkdir -p ~/public_html/uvi-temp
+rm -rf ~/public_html/uvi-temp/*
+
+PROJ_DIR="/home/verbs/shared/semlink-java"
+SOURCE_DIR="$1"
+SUPPL_DIR="$2"
+shift
+shift
+
+"$PROJ_DIR/scripts/public/run-uvig" -vos \
+   "$SOURCE_DIR" ~/public_html/uvi-temp "$SUPPL_DIR" "$@"
+

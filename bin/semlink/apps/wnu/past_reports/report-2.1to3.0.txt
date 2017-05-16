@@ -1,0 +1,141 @@
+WordNet Updater
+====================================================
+WordNet Mapping Mono File:    /usr/local/WordNet-Sense-Mappings/3.0/sensemap/2.1to3.0.verb.mono
+WordNet Mapping Poly File:    /usr/local/WordNet-Sense-Mappings/3.0/sensemap/2.1to3.0.verb.poly
+VerbNet XML Input Directory:  /home/verbs/shared/verbnet/release2.1-wn2.1-revised
+VerbNet XML Output Directory: /home/verbs/shared/verbnet/WordNetUpdater/derek-test-dir
+Flags:                        -n
+Executed On:                  Sat Mar 13 12:08:58 MDT 2010
+====================================================
+The following versions have been found on the specified WordNet mapping files:
+  Old Version: 2.1
+  New Version: 3.0
+Do you wish to proceed? (y/n):
+
+Progress:  [0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%]
+
+<<< Report Begin >>>
+
+(WNSK = WordNet Sense Key)
+
+1. VerbNet Statistics Only
+------------------------------------------------------------
+| This section describes statistics about just VerbNet and |
+| its WordNet sense keys.                                  |
+------------------------------------------------------------
+1.A. Total VN WNSK                                     5811
+1.B. Unique VN WNSK                                    4940
+1.C. VN WNSK with uncertainty (preceded by ?)           102
+
+
+2. WordNet Sense Mapping Statistics Only
+------------------------------------------------------------
+| This section describes statistics about just the         |
+| *.verb.mono and *.verb.poly files.                       |
+------------------------------------------------------------
+2.A. WNSK mappings in MONO file (lines in file)        6207
+2.B. WNSK that did not change in MONO file             6205
+2.C. WNSK that did change in MONO file                    2
+2.D. WNSK mappings in POLY file (lines in file)       18662
+2.E. WNSK that did not change in POLY file            18568
+2.F. WNSK that did change in POLY file                   94
+2.G. WNSK that map to multiple in POLY file              32
+2.H. Score distribution in POLY file
+       Score | Count | % Total
+         100 | 17815 |  95.46%
+          90 |   633 |   3.39%
+          80 |    24 |   0.13%
+          70 |    90 |   0.48%
+          60 |    29 |   0.16%
+          50 |     5 |   0.03%
+          40 |    11 |   0.06%
+          30 |     6 |   0.03%
+          20 |    38 |   0.20%
+          10 |     0 |   0.00%
+           0 |    11 |   0.06%
+       Total | 18662  *same as D above
+
+
+3. Translation Statistics
+------------------------------------------------------------
+| This section describes statistics concerning the         |
+| translation of VerbNet's WordNet keys from one version   |
+| of WordNet to another.                                   |
+------------------------------------------------------------
+3.A. VN WNSK found in MONO file                         847
+3.B. VN WNSK found in POLY file                        4964
+3.C. VN WNSK not found in either file                     0
+3.D. VN WNSK that map to multiple in POLY file            7
+3.E. VN WNSK mappings in POLY file with high score     4920
+        (score >= 90)
+3.F. VN WNSK mappings in POLY file with low score        43
+        (90 > score >= 10)
+3.G. VN WNSK mappings in POLY file with zero score        1
+        (10 > score = 0)
+
+
+4. Translation Lists
+-------------------------------------------------------------
+| This section contains the specific mappings from the      |
+| translation process that require inspection.              |
+-------------------------------------------------------------
+4.A. Not Found (3.C from above) [total items: 0]
+ [this list empty]
+4.B. Multiple (3.D from above) [total items: 7]
+ - lather%2:35:00 -> lather%2:29:01 lather%2:30:00 [braid-41.2.2]
+ - wreathe%2:42:00 -> wreathe%2:35:00 wreathe%2:35:01 wreathe%2:38:00 [butter-9.9]
+ - meet%2:35:00 -> meet%2:35:00 meet%2:41:03 [contiguous_location-47.8-1]
+ - relinquish%2:33:02 -> relinquish%2:35:02 relinquish%2:40:00 relinquish%2:41:00 [contribute-13.2-1]
+ - brighten%2:39:00 -> brighten%2:30:01 brighten%2:43:00 [other_cos-45.4]
+ - port%2:40:00 -> port%2:35:00 port%2:35:07 port%2:38:03 port%2:38:04 [send-11.1]
+ - flush%2:35:00 -> flush%2:30:00 flush%2:30:03 flush%2:39:00 [wipe_manner-10.4.1]
+4.C. Low Score (3.F from above) [total items: 43]
+ - affiliate%2:41:11 -> affiliate%2:41:00 [amalgamate-22.2-2]
+ - affect%2:37:00 -> affect%2:37:00 [amuse-31.1]
+ - tire%2:37:01 -> tire%2:37:01 [amuse-31.1]
+ - expel%2:35:00 -> expel%2:41:00 [banish-10.2]
+ - fold%2:35:03 -> fold%2:30:00 [bend-45.2]
+ - lather%2:35:00 -> lather%2:29:01 lather%2:30:00 [braid-41.2.2]
+ - wreathe%2:42:00 -> wreathe%2:35:00 wreathe%2:35:01 wreathe%2:38:00 [butter-9.9]
+ - encircle%2:42:00 -> encircle%2:35:12 [contiguous_location-47.8]
+ - ring%2:42:00 -> ring%2:35:03 [contiguous_location-47.8]
+ - surround%2:42:00 -> surround%2:35:00 [contiguous_location-47.8]
+ - meet%2:35:00 -> meet%2:35:00 meet%2:41:03 [contiguous_location-47.8-1]
+ - relinquish%2:33:02 -> relinquish%2:35:02 relinquish%2:40:00 relinquish%2:41:00 [contribute-13.2-1]
+ - surrender%2:33:01 -> surrender%2:33:00 [contribute-13.2-1-1]
+ - boil%2:30:00 -> boil%2:30:00 [cooking-45.3]
+ - agree%2:32:04 -> agree%2:42:03 [correspond-36.1-1]
+ - last%2:42:01 -> last%2:42:01 [cost-54.2]
+ - fold%2:35:03 -> fold%2:30:00 [crane-40.3.2]
+ - recede%2:38:00 -> recede%2:38:01 [escape-51.1-2]
+ - substitute%2:40:00 -> substitute%2:40:00 [exchange-13.6-1-1]
+ - prosper%2:30:00 -> prosper%2:40:00 [exist-47.1-1]
+ - encircle%2:42:00 -> encircle%2:35:12 [fill-9.8]
+ - ring%2:42:00 -> ring%2:35:03 [fill-9.8]
+ - surround%2:42:00 -> surround%2:35:00 [fill-9.8]
+ - prosper%2:30:00 -> prosper%2:40:00 [gorge-39.6]
+ - assemble%2:41:03 -> assemble%2:41:03 [herd-47.5.2]
+ - accelerate%2:30:01 -> accelerate%2:30:01 [other_cos-45.4]
+ - brighten%2:39:00 -> brighten%2:30:01 brighten%2:43:00 [other_cos-45.4]
+ - brighten%2:30:00 -> brighten%2:30:01 [other_cos-45.4]
+ - darken%2:39:00 -> darken%2:30:01 [other_cos-45.4]
+ - decelerate%2:30:01 -> decelerate%2:30:01 [other_cos-45.4]
+ - dim%2:39:00 -> dim%2:39:01 [other_cos-45.4]
+ - lighten%2:30:00 -> lighten%2:30:02 [other_cos-45.4]
+ - boil%2:30:00 -> boil%2:30:00 [preparing-26.3-2]
+ - dislodge%2:35:01 -> dislodge%2:35:01 [remove-10.1]
+ - eject%2:35:01 -> eject%2:35:01 [remove-10.1]
+ - expel%2:35:00 -> expel%2:41:00 [remove-10.1]
+ - uproot%2:41:00 -> uproot%2:41:00 [remove-10.1]
+ - leap%2:38:10 -> leap%2:38:10 [run-51.3.2]
+ - speed%2:30:02 -> speed%2:30:02 [run-51.3.2]
+ - convey%2:32:00 -> convey%2:32:00 [say-37.7-1]
+ - port%2:40:00 -> port%2:35:00 port%2:35:07 port%2:38:03 port%2:38:04 [send-11.1]
+ - stroke%2:35:00 -> stroke%2:35:00 [touch-20-1]
+ - flush%2:35:00 -> flush%2:30:00 flush%2:30:03 flush%2:39:00 [wipe_manner-10.4.1]
+4.D. Zero Score (3.G from above) [total items: 1]
+ - stun%2:37:00 [amuse-31.1]
+4.E. Other Warnings [total items: 0]
+ [this list empty]
+
+<<< Report End >>>

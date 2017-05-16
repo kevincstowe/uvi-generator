@@ -1,0 +1,20 @@
+
+####################
+## Compile Script ##
+####################
+
+# This script can be used to compile the semlink-java project.
+# This script is not set up to be accessed using a symbolic link.
+
+PROJ_DIR=$(cd `dirname "$0"` && cd ../.. && echo "$PWD")
+CLASS_PATH="$PROJ_DIR/lib/sfcc_1.1.jar"
+OUTPUT_DIR="$PROJ_DIR/bin"
+INPUT_FILES=`find "$PROJ_DIR/src" -name '*.java'`
+
+mkdir -p "$OUTPUT_DIR"
+javac -cp "$CLASS_PATH" -d "$OUTPUT_DIR" $INPUT_FILES
+
+ADDL_PATH="$PROJ_DIR/src/semlink/apps/wnu/past_reports/"
+ADDL_TARGET="$OUTPUT_DIR/semlink/apps/wnu/past_reports"
+mkdir -p "$ADDL_TARGET"
+cp -r "$ADDL_PATH"/* "$ADDL_TARGET"

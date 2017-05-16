@@ -1,0 +1,181 @@
+
+<HTML>
+   <HEAD>
+      <TITLE></TITLE>
+      <STYLE type='text/css'>
+         .OutsideTable
+         {
+            border: 1px black solid;
+         }
+         .TitleTD
+         {
+            font-size:    16pt;
+            font-variant: small-caps;
+            text-align:   center;
+         }
+         .TextBody
+         {
+            text-align: justify;
+         }
+         .CN
+         {
+            font-family: 'Courier New';
+         }
+         A
+         {
+            font-family:     Tahoma;
+            font-variant:    small-caps;
+            font-weight:     bold;
+            text-decoration: none;
+         }
+         A:link    { color: red;     }
+         A:visited { color: red;     }
+         A:hover   { color: #BB2345; }
+         .Resource
+         {
+            font-variant: small-caps;
+            text-decoration: underline;
+         }
+      </STYLE>
+   </HEAD>
+   <BODY bgcolor='khaki'>
+      <BR>
+      <TABLE align='center' width='700px' cellpadding=10 class='OutsideTable'>
+         <TR bgcolor='yellow'>
+            <TD class='TitleTD'>VxC: Usage</TD>
+         </TR>
+         <TR bgcolor='white'>
+            <TD>
+               <TABLE cellpadding=10>
+                  <TR valign='top'>
+                     <TD class='TextBody' width='50%'>
+<PRE>Usage: java vn.Inspector [flags] &lt;x> [-V &lt;v>] [-O &lt;o>] -C &lt;c> -M &lt;m> -F &lt;f> [-A &lt;a>] [-S &lt;s>]
+
+NOTE: Command-line elements can occur in any order.  Any element between
+      [ ] is optional.  -V, -O, etc. are called "operators".  Space between
+      operators and their arguments is optional.  Command-line elements
+      are case-sensitive.
+
+Flags:
+  -?    Display usage message and exit
+  -k    Display key and exit
+  -c    Display class hierarchy and exit (-V operator irrelevant)
+  -h    Suppress header before output
+  -n    Suppress final counts after output
+  -m    Include more counts by class (class counts inactive by default)
+  -0    Include count categories with a zero count
+  -w    Print the name of the current class being processed to stderr
+  -s    Sort the members in each class or subclass
+  -i    Indent output
+  -z    Suppress &lt;NO ...> for subclasses, members, thematic roles and frames
+  -q    Force underlying scanning system to operate on verb-frame pairs
+        NOTE: This scans the classes in the same manner as -Vq displays them,
+        but does not imply printing anything.  Exists so that you can make
+        verb-frame pair events fire without printing anything.  If this option
+        is specified, -Vm and -Vr imply -Vq if either is supplied. Also,
+        -Vq implies -q.
+  -v    Invert the order of -q or -Vq so as to visit verb-frame pairs in a
+        frame-major order instead of a verb-major order (-q or -Vq required)
+  -e    Suppress all events from firing
+  -r    Replicate labels that cause additional nesting (file, class, subclass,
+        and frame) before each and every line that is printed.  This option is
+        provided for increased interoperability with grep.  Grep's -B option
+        can be used to show the class and/or frame associated when searching
+        for a given pattern in the Inspector's output.
+
+&lt;x>: "VerbNet XML Input Directory"
+        Directory where all the VerbNet XML files reside (i.e. care-88.xml).
+        Note that the DTD file should also be located in this directory.
+
+&lt;v>: "View Options"
+        Control what output is extacted from the XML files and sent to
+        the console.  Example: '-Vcv' shows all verbs and the classes or
+        subclasses that they belong to.   These are the available options:
+            f - file names
+            c - class and subclass names
+            n - counts (members and frames, -Vc required)
+            m - members (i.e. verbs)
+            w - WordNet sense tags (-Vm required)
+            t - thematic roles
+            u - selectional restrictions for thematic roles (-Vt required)
+            r - frames
+            e - examples
+            x - syntax
+            y - syntax restrictions for syntax (-Vx required)
+            z - selectional restrictions for syntax (-Vx required)
+            s - semantics
+            a - all above options
+            q - verb-frame pairs (implies -Vm, -Vr and -q)
+            b - complete XML file content (includes obscure attributes)
+
+&lt;o>: "Only These Files"
+        An optional token used to limit the Inspector to a set of VerbNet
+        XML files.  This is a comma-delimited list of file names.  However,
+        you do not have to specify an entire file name.  You can specify any
+        number of characters that you want for each file name.  If an XML file
+        begins with the characters of any one of the file names you provided,
+        it will be processed.  No space is allowed in &lt;o> token.  Examples:
+            -Ochase-51.6.xml - the file chase-51.6.xml
+            -O chase-51.6.xml - same as above
+            -O chase-51.6 - same as above
+            -O chase - same as above (quite useful)
+            -O chase-51.6.xml,force-59.xml - both of these files
+            -O chase-51.6,force-59 - same as above
+            -O chase,force - same as above
+            -O chase, force - INVALID - no space allowed
+            -O ch,force-59 - all files that begin with a 'ch' and force-59.xml
+            -O m,n - all files that begin with an 'm' or an 'n'
+
+&lt;c>: "Cyc Rule File"
+        A properly formatted file containing all of the Cyc verbSemTrans
+        rules.  The format of this file is the same format as what is produced
+        when the 'predicate extent' option is selected for the verbSemTrans
+        predicate in the Cyc Knowledge Browser.
+
+&lt;m>: "Manual Mapping File"
+        The manual mapping XML file against which to compare Cyc matches.
+        Results are printed to stdout after the VerbNet information.
+
+&lt;f>: "Match Output File"
+        The file to create in a standard XML format representing all the matches
+        made by the automatic matching algorithm.
+
+&lt;a>: "Match Constraints"
+        The constraint(s) to use for deciding if a match exists between a VerbNet
+        verb-frame pair and a Cyc verbSemTrans rule.  Each is represented by a
+        single character.  Can mix-and-match as in this example: '-Atp'.  All
+        constraints besides 0 include n automatically.
+            0 - Debug Mode: Matches nothing regardless, only used alone
+            n - Naive Matching: Matches on lemma (default)
+                 (VerbNet Member and Cyc *-TheWord must be equal)
+            p - VN must have preposition if Cyc PPCompFrameFn
+            t - Transitivity congruence
+            i - Infinitive/gerund congruence
+            j - Adjective congruence
+            f - Cyc fromLocation implies VN Source
+            d - Cyc doneBy/performedBy implies VN Agent
+            m - Cyc MiddleVoiceFrame implies no VN Agent
+            a - enable all constraints (nptijfdm)
+        If this operator is not supplied, -An is assumed.  More information
+        concerning the constraints can be found in the Javadoc documentation
+        for the Cyc and Matcher classes.
+
+&lt;s>: "VxC Application Flags"
+        Additional flags for the VxC application.  These are:
+            c - Print class match counts
+            d - Print a line to stderr for each discarded match
+            m - Only look for matches in classes that are covered by the manual
+                mapping file; ignore all other classes</PRE>
+                     </TD>
+                  </TR>
+               </TABLE>
+            </TD>
+         </TR>
+         <TR bgcolor='gold'>
+            <TD>This page created on 2006.10.25.</TD>
+         </TR>
+      </TABLE>
+      <BR>
+   </BODY>
+</HTML>
+

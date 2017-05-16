@@ -1,0 +1,267 @@
+WordNet Updater
+====================================================
+WordNet Mapping Mono File:    /usr/local/WordNet-Sense-Mappings/2.0/sensemap/1.7.1to2.0.verb.mono
+WordNet Mapping Poly File:    /usr/local/WordNet-Sense-Mappings/2.0/sensemap/1.7.1to2.0.verb.poly
+VerbNet XML Input Directory:  /home/verbs/shared/verbnet/release2.1-clean-examples
+VerbNet XML Output Directory: /home/verbs/shared/verbnet/WordNetUpdater/derek-test-dir
+Flags:                        -n
+Executed On:                  Sat Mar 13 11:59:40 MDT 2010
+====================================================
+The following versions have been found on the specified WordNet mapping files:
+  Old Version: 1.7.1
+  New Version: 2.0
+Do you wish to proceed? (y/n):
+
+Progress:  [0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%]
+
+<<< Report Begin >>>
+
+(WNSK = WordNet Sense Key)
+
+1. VerbNet Statistics Only
+------------------------------------------------------------
+| This section describes statistics about just VerbNet and |
+| its WordNet sense keys.                                  |
+------------------------------------------------------------
+1.A. Total VN WNSK                                     5905
+1.B. Unique VN WNSK                                    5024
+1.C. VN WNSK with uncertainty (preceded by ?)           106
+
+
+2. WordNet Sense Mapping Statistics Only
+------------------------------------------------------------
+| This section describes statistics about just the         |
+| *.verb.mono and *.verb.poly files.                       |
+------------------------------------------------------------
+2.A. WNSK mappings in MONO file (lines in file)        5824
+2.B. WNSK that did not change in MONO file             5819
+2.C. WNSK that did change in MONO file                    5
+2.D. WNSK mappings in POLY file (lines in file)       18283
+2.E. WNSK that did not change in POLY file            18044
+2.F. WNSK that did change in POLY file                  239
+2.G. WNSK that map to multiple in POLY file              54
+2.H. Score distribution in POLY file
+       Score | Count | % Total
+         100 | 15914 |  87.04%
+          90 |  1900 |  10.39%
+          80 |    54 |   0.30%
+          70 |   182 |   1.00%
+          60 |    36 |   0.20%
+          50 |    32 |   0.18%
+          40 |    46 |   0.25%
+          30 |    29 |   0.16%
+          20 |    61 |   0.33%
+          10 |     0 |   0.00%
+           0 |    29 |   0.16%
+       Total | 18283  *same as D above
+
+
+3. Translation Statistics
+------------------------------------------------------------
+| This section describes statistics concerning the         |
+| translation of VerbNet's WordNet keys from one version   |
+| of WordNet to another.                                   |
+------------------------------------------------------------
+3.A. VN WNSK found in MONO file                         854
+3.B. VN WNSK found in POLY file                        5031
+3.C. VN WNSK not found in either file                    20
+3.D. VN WNSK that map to multiple in POLY file           10
+3.E. VN WNSK mappings in POLY file with high score     4883
+        (score >= 90)
+3.F. VN WNSK mappings in POLY file with low score       139
+        (90 > score >= 10)
+3.G. VN WNSK mappings in POLY file with zero score        9
+        (10 > score = 0)
+
+
+4. Translation Lists
+-------------------------------------------------------------
+| This section contains the specific mappings from the      |
+| translation process that require inspection.              |
+-------------------------------------------------------------
+4.A. Not Found (3.C from above) [total items: 20]
+ - distrust%2:32:00 [admire-31.2]
+ - enliven%2:29:00 [amuse-31.1]
+ - horrify%2:37:00 [amuse-31.1]
+ - rise%2:38:01 [assuming_position-50]
+ - coldcream%2:35:00 [braid-41.2.2]
+ - rise%2:38:01 [escape-51.1-2]
+ - deluge%2:42:10 [fill-9.8]
+ - flood%2:42:10 [fill-9.8]
+ - inundate%2:42:10 [fill-9.8]
+ - saturate%2:30:00 [fill-9.8]
+ - accumulate%2:35:00 [herd-47.5.2]
+ - accumulate%2:35:00 [obtain-13.5.2]
+ - degenerate%2:30:00 [other_cos-45.4]
+ - flood%2:42:10 [other_cos-45.4]
+ - scorch%2:30:01 [other_cos-45.4]
+ - declare%2:32:02 [reflexive_appearance-48.1.2]
+ - eliminate%2:29:01 [remove-10.1]
+ - detect%2:31:00 [see-30.1-1]
+ - stir%2:35:00 [shake-22.3-1-1]
+ - show%2:39:03 [transfer_mesg-37.1.1-1-1]
+4.B. Multiple (3.D from above) [total items: 10]
+ - regret%2:32:01 -> regret%2:32:00 regret%2:32:02 regret%2:37:00 regret%2:37:01 [admire-31.2-1]
+ - fracture%2:29:00 -> fracture%2:29:00 fracture%2:29:01 [break-45.1]
+ - meet%2:35:00 -> meet%2:35:00 meet%2:41:03 [contiguous_location-47.8-1]
+ - fill%2:35:12 -> fill%2:30:00 fill%2:30:01 fill%2:41:01 [fill-9.8]
+ - fracture%2:29:00 -> fracture%2:29:00 fracture%2:29:01 [hurt-40.8.3-1-1]
+ - worry%2:31:00 -> worry%2:35:00 worry%2:35:01 worry%2:37:00 [marvel-31.3-2]
+ - pool%2:40:01 -> pool%2:33:00 pool%2:40:00 [mix-22.1-2-1]
+ - halt%2:38:00 -> halt%2:38:01 halt%2:38:05 [other_cos-45.4]
+ - load%2:35:03 -> load%2:35:02 load%2:35:10 [spray-9.7-2]
+ - screw%2:35:00 -> screw%2:35:01 screw%2:35:03 [tape-22.4]
+4.C. Low Score (3.F from above) [total items: 139]
+ - regret%2:32:01 -> regret%2:32:00 regret%2:32:02 regret%2:37:00 regret%2:37:01 [admire-31.2-1]
+ - confuse%2:31:02 -> confuse%2:31:02 [amalgamate-22.2-2]
+ - mate%2:35:01 -> mate%2:33:00 [amalgamate-22.2-2-1]
+ - affect%2:37:00 -> affect%2:37:00 [amuse-31.1]
+ - harass%2:37:01 -> harass%2:33:00 [amuse-31.1]
+ - tire%2:37:01 -> tire%2:37:01 [amuse-31.1]
+ - ordain%2:41:03 -> ordain%2:41:02 [appoint-29.1]
+ - scuffle%2:33:00 -> scuffle%2:35:00 [battle-36.4-1]
+ - tussle%2:33:00 -> tussle%2:35:01 [battle-36.4-1]
+ - begin%2:32:04 -> begin%2:42:02 [begin-55.1-1]
+ - snipe%2:33:02 -> snipe%2:33:01 [berry-13.7]
+ - fine%2:40:00 -> fine%2:41:00 [bill-54.5]
+ - sway%2:38:02 -> sway%2:38:06 [body_internal_motion-49]
+ - sway%2:38:03 -> sway%2:38:06 [body_internal_motion-49]
+ - totter%2:38:02 -> totter%2:38:02 [body_internal_motion-49]
+ - tremble%2:29:00 -> tremble%2:38:00 [body_internal_states-40.6]
+ - trim%2:29:00 -> trim%2:35:03 [braid-41.2.2]
+ - break%2:41:08 -> break%2:41:01 [break-45.1]
+ - break%2:29:04 -> break%2:29:04 [break-45.1]
+ - fracture%2:29:00 -> fracture%2:29:00 fracture%2:29:01 [break-45.1]
+ - grow%2:30:01 -> grow%2:30:01 [build-26.1]
+ - groove%2:35:01 -> groove%2:35:02 [butter-9.9]
+ - tar%2:35:02 -> tar%2:35:00 [butter-9.9]
+ - rise%2:38:03 -> rise%2:38:02 [calibratable_cos-45.6-1]
+ - haul%2:35:02 -> haul%2:35:00 [carry-11.4]
+ - drain%2:30:00 -> drain%2:30:01 [cheat-10.6-1]
+ - munch%2:34:01 -> munch%2:34:00 [chew-39.2-1]
+ - nibble%2:34:00 -> nibble%2:34:01 [chew-39.2-1]
+ - drain%2:30:00 -> drain%2:30:01 [clear-10.3-1]
+ - color%2:32:00 -> color%2:32:00 [coloring-24]
+ - glaze%2:36:00 -> glaze%2:35:00 [coloring-24]
+ - lacquer%2:35:00 -> lacquer%2:36:00 [coloring-24]
+ - complete%2:41:00 -> complete%2:41:00 [complete-55.2]
+ - meet%2:35:00 -> meet%2:35:00 meet%2:41:03 [contiguous_location-47.8-1]
+ - surrender%2:41:00 -> surrender%2:40:00 [contribute-13.2-1-1]
+ - mate%2:35:01 -> mate%2:33:00 [correspond-36.1]
+ - agree%2:32:04 -> agree%2:42:03 [correspond-36.1-1]
+ - last%2:42:04 -> last%2:42:00 [cost-54.2]
+ - style%2:36:01 -> style%2:36:00 [create-26.4]
+ - dub%2:41:00 -> dub%2:41:00 [dub-29.3]
+ - seethe%2:30:03 -> seethe%2:30:03 [entity_specific_modes_being-47.2]
+ - reward%2:41:00 -> reward%2:32:00 [equip-13.4.2-1]
+ - persist%2:42:01 -> persist%2:42:01 [exist-47.1-1]
+ - fill%2:35:12 -> fill%2:30:00 fill%2:30:01 fill%2:41:01 [fill-9.8]
+ - seat%2:42:00 -> seat%2:42:00 [fit-54.3]
+ - sleep%2:42:00 -> sleep%2:42:00 [fit-54.3]
+ - gulp%2:34:00 -> gulp%2:32:00 [gobble-39.3-2]
+ - grow%2:30:01 -> grow%2:30:01 [grow-26.2]
+ - assemble%2:41:03 -> assemble%2:41:03 [herd-47.5.2]
+ - cluster%2:38:00 -> cluster%2:38:00 [herd-47.5.2]
+ - collect%2:38:00 -> collect%2:35:00 [herd-47.5.2]
+ - flock%2:38:00 -> flock%2:38:00 [herd-47.5.2]
+ - gather%2:38:00 -> gather%2:35:00 [herd-47.5.2]
+ - smack%2:35:00 -> smack%2:34:00 [hit-18.1-1]
+ - grip%2:35:01 -> grip%2:35:00 [hold-15.1-1]
+ - handle%2:39:00 -> handle%2:35:00 [hold-15.1-1]
+ - break%2:29:04 -> break%2:29:04 [hurt-40.8.3-1-1]
+ - fracture%2:29:00 -> fracture%2:29:00 fracture%2:29:01 [hurt-40.8.3-1-1]
+ - investigate%2:32:01 -> investigate%2:32:01 [investigate-35.4]
+ - scan%2:31:01 -> scan%2:31:00 [investigate-35.4]
+ - bless%2:32:00 -> bless%2:32:00 [judgement-33]
+ - reward%2:40:01 -> reward%2:32:00 [judgement-33]
+ - fine%2:40:00 -> fine%2:41:00 [judgement-33]
+ - lambaste%2:32:00 -> lambaste%2:32:00 [judgement-33]
+ - reprimand%2:32:01 -> reprimand%2:32:01 [judgement-33]
+ - scold%2:32:00 -> scold%2:32:00 [judgement-33]
+ - glare%2:43:00 -> glare%2:39:01 [light_emission-43.1]
+ - ache%2:37:06 -> ache%2:37:06 [long-32.2-1]
+ - long%2:37:01 -> long%2:37:02 [long-32.2-1]
+ - yearn%2:37:01 -> yearn%2:37:01 [long-32.2-1]
+ - yearn%2:37:01 -> yearn%2:37:01 [long-32.2-2]
+ - screech%2:32:00 -> screech%2:32:01 [manner_speaking-37.3]
+ - worry%2:31:00 -> worry%2:35:00 worry%2:35:01 worry%2:37:00 [marvel-31.3-2]
+ - worry%2:31:11 -> worry%2:37:12 [marvel-31.3-2]
+ - ache%2:37:06 -> ache%2:37:06 [marvel-31.3-4]
+ - disapprove%2:32:00 -> disapprove%2:32:00 [marvel-31.3-6]
+ - seethe%2:37:01 -> seethe%2:37:00 [marvel-31.3-8]
+ - add%2:30:00 -> add%2:30:00 [mix-22.1-2]
+ - pool%2:40:01 -> pool%2:33:00 pool%2:40:00 [mix-22.1-2-1]
+ - revolve%2:38:02 -> revolve%2:38:02 [modes_of_being_with_motion-47.3]
+ - sway%2:38:02 -> sway%2:38:06 [modes_of_being_with_motion-47.3]
+ - sway%2:38:03 -> sway%2:38:06 [modes_of_being_with_motion-47.3]
+ - totter%2:38:02 -> totter%2:38:02 [modes_of_being_with_motion-47.3]
+ - tremble%2:29:00 -> tremble%2:38:00 [modes_of_being_with_motion-47.3]
+ - appropriate%2:40:00 -> appropriate%2:40:00 [obtain-13.5.2]
+ - seize%2:40:01 -> seize%2:40:01 [obtain-13.5.2]
+ - knight%2:41:00 -> knight%2:41:01 [orphan-29.7]
+ - accelerate%2:30:01 -> accelerate%2:30:01 [other_cos-45.4]
+ - close%2:35:11 -> close%2:35:11 [other_cos-45.4]
+ - crumble%2:30:13 -> crumble%2:30:13 [other_cos-45.4]
+ - decelerate%2:30:00 -> decelerate%2:30:00 [other_cos-45.4]
+ - decelerate%2:30:01 -> decelerate%2:30:01 [other_cos-45.4]
+ - deepen%2:30:02 -> deepen%2:30:02 [other_cos-45.4]
+ - drain%2:30:00 -> drain%2:30:01 [other_cos-45.4]
+ - grow%2:30:01 -> grow%2:30:01 [other_cos-45.4]
+ - halt%2:38:00 -> halt%2:38:01 halt%2:38:05 [other_cos-45.4]
+ - halt%2:30:12 -> halt%2:38:05 [other_cos-45.4]
+ - propagate%2:29:01 -> propagate%2:29:01 [other_cos-45.4]
+ - slow%2:30:00 -> slow%2:30:00 [other_cos-45.4]
+ - weaken%2:30:00 -> weaken%2:30:00 [other_cos-45.4]
+ - peek%2:39:00 -> peek%2:39:02 [peer-30.3]
+ - spin%2:32:00 -> spin%2:32:00 [performance-26.7-2-1]
+ - revolve%2:38:02 -> revolve%2:38:02 [roll-51.3.1]
+ - forage%2:33:00 -> forage%2:40:00 [rummage-35.5]
+ - leaf%2:38:01 -> leaf%2:38:00 [rummage-35.5]
+ - hurry%2:30:01 -> hurry%2:30:01 [run-51.3.2]
+ - leap%2:38:10 -> leap%2:38:10 [run-51.3.2]
+ - speed%2:30:02 -> speed%2:30:02 [run-51.3.2]
+ - stagger%2:38:02 -> stagger%2:38:01 [run-51.3.2]
+ - stroll%2:38:01 -> stroll%2:38:00 [run-51.3.2]
+ - totter%2:38:02 -> totter%2:38:02 [run-51.3.2]
+ - trudge%2:38:00 -> trudge%2:38:01 [run-51.3.2]
+ - hurry%2:30:01 -> hurry%2:30:01 [rush-53.2]
+ - rush%2:30:01 -> rush%2:30:01 [rush-53.2]
+ - cluster%2:38:00 -> cluster%2:38:00 [shake-22.3-2]
+ - collect%2:38:00 -> collect%2:35:00 [shake-22.3-2]
+ - investigate%2:32:01 -> investigate%2:32:01 [sight-30.2]
+ - scan%2:31:01 -> scan%2:31:00 [sight-30.2]
+ - crunch%2:39:00 -> crunch%2:32:00 [sound_emission-43.2]
+ - screech%2:32:00 -> screech%2:32:01 [sound_emission-43.2]
+ - thud%2:39:01 -> thud%2:39:01 [sound_emission-43.2]
+ - toll%2:39:01 -> toll%2:39:00 [sound_emission-43.2]
+ - rest%2:29:00 -> rest%2:29:00 [spatial_configuration-47.6]
+ - smear%2:35:00 -> smear%2:35:03 [spray-9.7-1]
+ - spritz%2:35:00 -> spritz%2:35:00 [spray-9.7-1]
+ - pack%2:35:03 -> pack%2:38:02 [spray-9.7-1-1]
+ - pack%2:35:01 -> pack%2:35:01 [spray-9.7-1-1]
+ - load%2:35:03 -> load%2:35:02 load%2:35:10 [spray-9.7-2]
+ - load%2:35:00 -> load%2:35:02 [spray-9.7-2]
+ - capture%2:40:00 -> capture%2:40:00 [steal-10.5]
+ - seize%2:40:01 -> seize%2:40:01 [steal-10.5]
+ - pin%2:35:00 -> pin%2:35:01 [tape-22.4]
+ - screw%2:35:00 -> screw%2:35:01 screw%2:35:03 [tape-22.4]
+ - flip%2:35:02 -> flip%2:35:05 [throw-17.1-1]
+ - sledge%2:38:00 -> sledge%2:38:02 [vehicle-51.4.1]
+ - need%2:37:00 -> need%2:34:01 [want-32.1]
+ - need%2:37:00 -> need%2:34:01 [want-32.1-1-1]
+ - flush%2:30:03 -> flush%2:30:03 [wipe_manner-10.4.1]
+ - trim%2:29:00 -> trim%2:35:03 [wipe_manner-10.4.1]
+4.D. Zero Score (3.G from above) [total items: 9]
+ - nettle%2:32:00 [amuse-31.1]
+ - outrage%2:37:00 [amuse-31.1]
+ - soap%2:35:00 [braid-41.2.2]
+ - foam%2:30:01 [entity_specific_modes_being-47.2]
+ - foam%2:30:00 [entity_specific_modes_being-47.2]
+ - stray%2:38:02 [run-51.3.2]
+ - swish%2:38:00 [sound_emission-43.2]
+ - foam%2:30:01 [substance_emission-43.4]
+ - foam%2:30:00 [substance_emission-43.4]
+4.E. Other Warnings [total items: 1]
+ - Both "?drain%2:30:01" and "drain%2:30:01" exist. [cheat-10.6-1]
+
+<<< Report End >>>

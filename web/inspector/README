@@ -1,0 +1,25 @@
+
+the events fire regardless of view options
+
+the counts represent outputted labels only (nothing to do with event-firing)
+
+      println( "        NOTE: This scans the files in the same manner as -Vq displays them," );
+      println( "        but does not imply printing anything.  Exists so that you can make" );
+      println( "        verb-frame pair events fire without printing anything.  If this option" );
+      println( "        is specified, -Vm and -Vr imply -Vq if either is supplied." );
+
+important to note that end class and end subclass don't fire until they are
+completely done, not just after their endframes event, they maybe include other
+subclasses before exiting
+
+talk about example UNIX scripts and how they relate to windows
+
+
+when combined with grep...even more powerful
+
+how to add your own flags
+how to use existing flags
+how to modify output stream
+how to execute program
+issues with packages
+1.4.2/1.5.0 issues

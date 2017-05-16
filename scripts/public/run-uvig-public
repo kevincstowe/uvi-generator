@@ -1,0 +1,39 @@
+
+################
+## Run Script ##
+################
+
+# This script runs the UVIG tool.
+#
+# This script is similar to the 'run-uvig' script, but it has
+# specific arguments for re-generating the UVI from the
+# most recent VerbNet files.  These files are assumed to be in
+#   /home/verbs/shared/verbnet/release-newest
+# which is a symbolic link to the directory with the most
+# recent VerbNet version.  Furthermore, it is assumed that the
+# output directory is .. which it should be if this script
+# is still in the generator/ directory under verb-index/.
+#
+# The word 'public' is used to indicate that this script
+# is specific to the installation of the UVI/UVIG on verbs
+# in their original locations (verb-index/ and verb-index/generator/).
+
+PROJ_DIR="/home/verbs/shared/semlink-java"
+
+"$PROJ_DIR/scripts/public/run-uvig" -vos \
+   /home/verbs/shared/verbnet/release-newest \
+   /usr/local/adm/config/apache/htdocs/verbs/verb-index \
+   /home/verbs/shared/semlink-java/supplemental
+
+# In this case, since the output directory is the public
+# UVI website, make sure the files are all writable by others
+# in the web group.
+chmod g+w /usr/local/adm/config/apache/htdocs/verbs/verb-index/* 2> /dev/null
+chmod -R g+w /usr/local/adm/config/apache/htdocs/verbs/verb-index/vn 2> /dev/null
+chmod -R g+w /usr/local/adm/config/apache/htdocs/verbs/verb-index/wn 2> /dev/null
+chmod -R g+w /usr/local/adm/config/apache/htdocs/verbs/verb-index/images 2> /dev/null
+chmod -R g+w /usr/local/adm/config/apache/htdocs/verbs/verb-index/index 2> /dev/null
+chmod -R g+w /usr/local/adm/config/apache/htdocs/verbs/verb-index/search 2> /dev/null
+chmod a+w /usr/local/adm/config/apache/htdocs/verbs/verb-index/comments 2> /dev/null
+chmod -R g+w /usr/local/adm/config/apache/htdocs/verbs/verb-index/users 2> /dev/null
+

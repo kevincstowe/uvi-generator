@@ -1,0 +1,47 @@
+
+###################
+## Deploy Script ##
+###################
+
+# This script can be used to deploy the semlink-java project.
+# This script is not set up to be accessed using a symbolic link.
+
+# Source paths.
+PROJ_DIR=$(cd `dirname "$0"` && cd ../.. && echo "$PWD")
+LIB_DIR="$PROJ_DIR/lib"
+BIN_DIR="$PROJ_DIR/bin"
+PUB_DIR="$PROJ_DIR/scripts/public"
+SUP_DIR="$PROJ_DIR/web/uvig/supplemental"
+
+# Compile the code.
+"$PROJ_DIR/scripts/local/compile"
+
+# Create the JAR that contains all the code.
+JAR_PATH="$LIB_DIR/semlink.jar"
+cd "$BIN_DIR"
+jar cf "$JAR_PATH" "semlink"
+
+# Destination paths.
+DEPLOY_DIR="/home/verbs/shared/semlink-java"
+DEPLOY_LIB_DIR="$DEPLOY_DIR/lib"
+DEPLOY_SCR_DIR="$DEPLOY_DIR/scripts"
+DEPLOY_PUB_DIR="$DEPLOY_DIR/scripts/public"
+DEPLOY_SUP_DIR="$DEPLOY_DIR/supplemental"
+
+# Create the destination directories.
+mkdir -p "$DEPLOY_LIB_DIR"
+mkdir -p "$DEPLOY_PUB_DIR"
+mkdir -p "$DEPLOY_SUP_DIR"
+
+# Copy over the libraries and scripts.
+cp "$LIB_DIR"/* "$DEPLOY_LIB_DIR"
+cp "$PUB_DIR"/* "$DEPLOY_PUB_DIR"
+
+# Copy over the UVIG's supplemental directory.
+cp -r "$SUP_DIR"/* "$DEPLOY_SUP_DIR"
+
+# Change the permissions on the files.
+find "$DEPLOY_DIR" -type d -exec chmod g+rwx,o+rx {} \; 2> /dev/null
+find "$DEPLOY_DIR" -type f -exec chmod g+rw,o+r {} \; 2> /dev/null
+find "$DEPLOY_PUB_DIR" -type f -exec chmod g+rwx,o+rx {} \; 2> /dev/null
+

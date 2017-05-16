@@ -1,0 +1,56 @@
+# This script should be executed from within the verb-index/inspector directory.
+# You'll need to recreate inspector.zip after running this script.
+
+# Compile the Inspector.
+compile
+
+# Compile the mock application.
+cd mock-app
+../compile
+
+# Create a brand new download directory.
+cd ..
+rm -rf download
+mkdir download
+
+# Create the 'download/inspector' directory.
+cd download
+mkdir inspector
+
+# Copy source code, compiled code, mock application, Javadoc 
+# documentation and README to 'download/inspector' directory.
+cp -r ../src inspector
+cp -r ../vn inspector
+cp -r ../mock-app inspector
+cp -r ../javadoc inspector
+cp ../README inspector
+
+#TEMPORARY STATEMENTS don't let the world see a weird, unfinished readme.
+echo 'README not complete. Check online Javadoc documentation and usage notes for now.  Thank you.' > inspector/README
+echo 'README not complete. Check online Javadoc documentation and usage notes for now.  Thank you.' > inspector/mock-app/README
+
+# Copy the example UNIX scripts to both the Inspector and the mock application.
+cp ../scripts/* inspector
+cp ../scripts/* inspector/mock-app
+
+# Remove specific unwanted scripts from download mock application (I was
+# using some scripts called goc, goi, and goj).
+rm -f inspector/mock-app/go*
+
+# Delete all '.DS_Store' files in the download directory.  These can appear
+# when someone using an Apple computer uploads files (like me).
+find inspector -name '.DS_Store' -exec rm {} \;
+
+# Create tarball of 'download/inspector' directory.
+tar cvf inspector.tar inspector
+
+# Zip the tarball just created.
+gzip inspector.tar
+
+# Make sure the permissions and group are correct for all files in 
+# Inspector directory.  The creation of new files makes files without
+# the proper settings.
+cd ..
+chgrp -R www *
+chmod -R g-w *
+

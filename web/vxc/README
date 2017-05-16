@@ -1,0 +1,22 @@
+README not complete
+
+
+AM matches across all classes for {n/p/t/pt} - it's consistent
+because they are mututally exclusive matches.
+
+26128 - 20771 = 5357
+26128 - 19856 = 6272
+
+5357+6272 = 11629
+
+26128 - 11629 = 14499!! yes!!
+
+compressed file
+
+
+Change
+Inspector.printUsage (both new and 'all')
+Cyc.ALL_MATCH_CONSTRS yes now
+Cyc's class description
+Cyc.findCycMatches() yes now
+Match Class method yes now

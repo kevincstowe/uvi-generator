@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE VNCLASS SYSTEM "vn_class-3.dtd">
+<VNCLASS ID="structural_modification-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vn_schema-3.xsd">
+    <MEMBERS>
+        <MEMBER name="phosphorylate" wn="" grouping=""/>
+        <MEMBER name="autophosphorylate" wn="" grouping=""/>
+        <MEMBER name="anti-phosphorylate" wn="" grouping=""/>
+        <MEMBER name="hyper-phosphorylate" wn="" grouping=""/>
+        <MEMBER name="methylate" wn="" grouping=""/>
+        <MEMBER name="acetylate" wn="" grouping=""/>
+        <MEMBER name="glycosylate" wn="" grouping=""/>
+        <MEMBER name="farsenylate" wn="" grouping=""/>
+        <MEMBER name="palmitoylate" wn="" grouping=""/>
+        <MEMBER name="palmytoylate" wn="" grouping=""/>
+        <MEMBER name="prenylate" wn="" grouping=""/>
+        <MEMBER name="protanate" wn="" grouping=""/>
+        <MEMBER name="sulfation" wn="" grouping=""/>
+        <MEMBER name="sulphation" wn="" grouping=""/>
+        <MEMBER name="sulfation" wn="" grouping=""/>
+        <MEMBER name="hydroxylate" wn="" grouping=""/>
+        <MEMBER name="carboxylate" wn="" grouping=""/>
+        <MEMBER name="myristoylate" wn="" grouping=""/>
+        <MEMBER name="ubiquitinate" wn="" grouping=""/>
+        <MEMBER name="polyubiquitinate" wn="" grouping=""/>
+        <MEMBER name="hydrogenate" wn="" grouping=""/>
+        <MEMBER name="sumoylate" wn="" grouping=""/>
+    </MEMBERS>
+    <THEMROLES>
+        <THEMROLE type="Cause">
+            <SELRESTRS>
+                <SELRESTR Value="+" type="entity"/>
+            </SELRESTRS>
+        </THEMROLE>
+        <THEMROLE type="Patient">
+            <SELRESTRS>
+                <SELRESTR Value="+" type="entity"/>
+            </SELRESTRS>
+        </THEMROLE>
+        <THEMROLE type="Location">
+            <SELRESTRS>
+                <SELRESTR Value="+" type="amino_acid_site"/>
+            </SELRESTRS>
+        </THEMROLE>
+    </THEMROLES>
+    <FRAMES>
+        <FRAME>
+            <DESCRIPTION descriptionNumber="" primary="NP V NP" secondary="" xtag=""/>
+            <EXAMPLES>
+                <EXAMPLE>At present little is known about the substrates for ERK5 in vivo , however it has been suggested to phosphorylate connexin 43 [ 11 ] and the transcription factor MEF2C [ 12 - 14 ] .</EXAMPLE>
+            </EXAMPLES>
+            <SYNTAX>
+                <NP value="Cause">
+                    <SYNRESTRS/>
+                </NP>
+                <VERB/>
+                <NP value="Patient">
+                    <SYNRESTRS/>
+                </NP>
+            </SYNTAX>
+            <SEMANTICS>
+                <PRED value="structural_modification">
+                    <ARGS>
+                        <ARG type="Event" value="during(E)"/>
+                        <ARG type="ThemRole" value="Cause"/>
+                        <ARG type="ThemRole" value="Patient"/>
+                    </ARGS>
+                </PRED>
+            </SEMANTICS>
+        </FRAME>
+        <FRAME>
+            <DESCRIPTION descriptionNumber="" primary="NP V NP" secondary="" xtag=""/>
+            <EXAMPLES>
+                <EXAMPLE>In all cell lines examined , we observed an increase in tyrosine phosphorylation in response to ligand ( Figure 10A ) .</EXAMPLE>
+            </EXAMPLES>
+            <SYNTAX>
+                <NP value="Cause">
+                    <SYNRESTRS/>
+                </NP>
+                <VERB/>
+                <NP value="Location">
+                    <SYNRESTRS/>
+                </NP>
+            </SYNTAX>
+            <SEMANTICS>
+                <PRED value="structural_modification">
+                    <ARGS>
+                        <ARG type="Event" value="during(E)"/>
+                        <ARG type="ThemRole" value="Cause"/>
+                        <ARG type="ThemRole" value="?Patient"/>
+                    </ARGS>
+                </PRED>
+                <PRED value="?Prep">
+                    <ARGS>
+                        <ARG type="Event" value="during(E)"/>
+                        <ARG type="ThemRole" value="?Patient"/>
+                        <ARG type="ThemRole" value="Location"/>
+                    </ARGS>
+                </PRED>
+            </SEMANTICS>
+        </FRAME>
+        <FRAME>
+            <DESCRIPTION descriptionNumber="" primary="NP V NP PP" secondary="" xtag=""/>
+            <EXAMPLES>
+                <EXAMPLE>Upon ligand binding , the PDGFRβ dimerizes and is autophosphorylated on as many as 13 cytoplasmic tyrosine residues .</EXAMPLE>
+            </EXAMPLES>
+            <SYNTAX>
+                <NP value="Cause">
+                    <SYNRESTRS/>
+                </NP>
+                <VERB/>
+                <NP value="Patient">
+                    <SYNRESTRS/>
+                </NP>
+                <PREP value="on at">
+                    <SELRESTRS/>
+                </PREP>
+                <NP value="Location">
+                    <SYNRESTRS/>
+                </NP>
+            </SYNTAX>
+            <SEMANTICS>
+                <PRED value="structural_modification">
+                    <ARGS>
+                        <ARG type="Event" value="during(E)"/>
+                        <ARG type="ThemRole" value="Cause"/>
+                        <ARG type="ThemRole" value="Patient"/>
+                    </ARGS>
+                </PRED>
+                <PRED value="Prep">
+                    <ARGS>
+                        <ARG type="Event" value="during(E)"/>
+                        <ARG type="ThemRole" value="Patient"/>
+                        <ARG type="ThemRole" value="Location"/>
+                    </ARGS>
+                </PRED>
+            </SEMANTICS>
+        </FRAME>
+        <FRAME>
+            <DESCRIPTION descriptionNumber="" primary="NP V NP PP" secondary="" xtag=""/>
+            <EXAMPLES>
+                <EXAMPLE>This suggests that either MEF2C has functions which are independent of its phosphorylation by ERK5 in vivo at this developmental stage , or that other kinases such as p38 can also phosphorylate the same sites on MEF2C as ERK5 in vivo.</EXAMPLE>
+            </EXAMPLES>
+            <SYNTAX>
+                <NP value="Cause">
+                    <SYNRESTRS/>
+                </NP>
+                <VERB/>
+                <NP value="Location">
+                    <SYNRESTRS/>
+                </NP>
+                <PREP value="on at">
+                    <SELRESTRS/>
+                </PREP>
+                <NP value="Patient">
+                    <SYNRESTRS/>
+                </NP>
+            </SYNTAX>
+            <SEMANTICS>
+                <PRED value="structural_modification">
+                    <ARGS>
+                        <ARG type="Event" value="during(E)"/>
+                        <ARG type="ThemRole" value="Cause"/>
+                        <ARG type="ThemRole" value="Patient"/>
+                    </ARGS>
+                </PRED>
+                <PRED value="Prep">
+                    <ARGS>
+                        <ARG type="Event" value="during(E)"/>
+                        <ARG type="ThemRole" value="Patient"/>
+                        <ARG type="ThemRole" value="Location"/>
+                    </ARGS>
+                </PRED>
+            </SEMANTICS>
+        </FRAME>
+    </FRAMES>
+    <SUBCLASSES/>
+</VNCLASS>
+

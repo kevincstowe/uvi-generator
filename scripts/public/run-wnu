@@ -1,0 +1,33 @@
+
+################
+## Run Script ##
+################
+
+# This script runs the WordNetUpdater application in the semlink-java project.
+#
+# This script has a hard-coded path to the compiled code so
+# it is meant to point to the shared deployment and symbolic
+# links can be used to point to this script.
+#
+# Here are the two primary uses of this tool, as examples:
+# (the first example below just prints a report about the update
+# instead of producing the updated files and the second
+# example prints a report and produces updated files).
+#
+#    run-wnu ~/svn/verbnet/trunk /usr/local/WordNet-Sense-Mappings/2.0/sensemap
+#    run-wnu -no ~/svn/verbnet/trunk
+#       /usr/local/WordNet-Sense-Mappings/2.0/sensemap
+#       ~/my-updated-vn
+#
+#    -n means a new, updated set of VerbNet XML files are desired
+#    -o means overwrite any existing files in my supplied output directory
+#
+# For additional information, check the usage note:
+#
+#    run-wnu -?
+
+PROJ_DIR="/home/verbs/shared/semlink-java"
+CLASS_PATH="$PROJ_DIR/lib/semlink.jar:$PROJ_DIR/lib/sfcc_1.1.jar"
+APP_NAME="semlink.apps.wnu.WordNetUpdater"
+
+java -cp "$CLASS_PATH" "$APP_NAME" "$@"

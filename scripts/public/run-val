@@ -1,0 +1,31 @@
+
+################
+## Run Script ##
+################
+
+# This script runs the XMLValidation application in the semlink-java project.
+#
+# This script has a hard-coded path to the compiled code so
+# it is meant to point to the shared deployment and symbolic
+# links can be used to point to this script.
+#
+# You can specify any number of arguments
+# to this script.  Each argument is considered an "XML Input Object". An
+# XML Input Object is either a file in XML format or a directory containing
+# '.xml' files.  Individual files do not have to end in '.xml'.  Here are
+# some examples:
+#
+#    run-val somefile.q
+#    run-val myfile.xml yourfile.xml
+#    run-val ../verbnet-2.1/
+#    run-val myfile.xml ../verbnet-2.1/ yourfile.xml ~/lots-of-xml/ somefile.q
+#
+# For additional information, check the usage note:
+#
+#    run-val -?
+
+PROJ_DIR="/home/verbs/shared/semlink-java"
+CLASS_PATH="$PROJ_DIR/lib/semlink.jar:$PROJ_DIR/lib/sfcc_1.1.jar"
+APP_NAME="semlink.apps.val.XMLValidator"
+
+java -cp "$CLASS_PATH" "$APP_NAME" "$@"

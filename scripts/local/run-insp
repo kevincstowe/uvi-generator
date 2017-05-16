@@ -1,0 +1,30 @@
+
+################
+## Run Script ##
+################
+
+# This script runs the VerbNet Inspector application in the semlink-java project.
+#
+# This script uses a path relative to the project and cannot be used via
+# a symbolic link.
+#
+# So, for example, you could type the following commands:
+# (the first example below is a good representative use
+# of this script assuming the symbolic link 'release-newest' is
+# still maintained to point to the most recent version of the VerbNet
+# XML files - the command just prints everything in VerbNet)
+#
+#    run-insp /home/verbs/shared/verbnet/release-newest -Vab -i
+#    run-insp /home/verbs/shared/verbnet/release2.0-derek-clean -ci
+#    run-insp -i -Vfcrxyz ~/my-verbnet-files
+#    run-insp -i -Vcq vn2.1 -Ospray
+#
+# For additional information, check the usage note:
+#
+#    run-insp -?
+
+PROJ_DIR=$(cd `dirname "$0"` && cd ../.. && echo "$PWD")
+CLASS_PATH="$PROJ_DIR/bin:$PROJ_DIR/lib/sfcc_1.1.jar"
+APP_NAME="semlink.apps.inspector.Inspector"
+
+java -cp "$CLASS_PATH" "$APP_NAME" "$@"

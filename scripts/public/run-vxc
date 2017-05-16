@@ -1,0 +1,37 @@
+
+################
+## Run Script ##
+################
+
+# This script runs the VerbNet VxC application in the semlink-java project.
+#
+# This script has a hard-coded path to the compiled code so
+# it is meant to point to the shared deployment and symbolic
+# links can be used to point to this script.
+#
+# Below is an example usage of VxC.  There are many parameters
+# to supply to the VxC application so line-continuation characters (\)
+# are used to supply the command on multiple lines.  You, however,
+# can type the entire command out on a single line.  This
+# example places the final results of the VxC application into an
+# external file called 'vxc.output.all' and the final mapping
+# in to a file called 'vxc.match.all'.  The example uses the
+# Cyc input file and manual mapping file found in the supplemental/
+# directory.  This example applies all constraints implemented
+# by VxC.
+#
+#    run-vxc /home/verbs/shared/verbnet/release2.0-derek-clean -q \
+#        -C supplemental/cyc-rules.txt \
+#        -M supplemental/manual-mapping.xml \
+#        -F vxc.match.all -Aa > vxc.output.all
+#
+# Remember that the -C, -M, and -F operators are mandatory.
+# For additional information, check the usage note:
+#
+#    run-vxc -?
+
+PROJ_DIR="/home/verbs/shared/semlink-java"
+CLASS_PATH="$PROJ_DIR/lib/semlink.jar:$PROJ_DIR/lib/sfcc_1.1.jar"
+APP_NAME="semlink.apps.vxc.Inspector"
+
+java -cp "$CLASS_PATH" "$APP_NAME" "$@"

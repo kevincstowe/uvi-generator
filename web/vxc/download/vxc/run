@@ -1,0 +1,20 @@
+
+# This script runs the VxC application.  This script is similar to
+# the 'run' script, but it has specific arguments for using files
+# specific to the 'verbs' server.  The VerbNet XML files are assumed
+# to be in
+#   /home/verbs/shared/verbnet/release2.0-derek-clean
+# This script places the final results of the VxC application into an
+# external file called 'vxc.output.all' and the final mapping
+# into a file called 'vxc.match.all'.  The -Sd option is used to 
+# send all discards to stderr.  This output is placed into the external
+# file called 'vxc.discards.all'.  The script uses the
+# Cyc input file and manual mapping file found in the supplemental/
+# directory.  This script applies all constraints implemented
+# by VxC.
+
+java vn.Inspector /home/verbs/shared/verbnet/release2.0-derek-clean -q \
+     -C supplemental/cyc-rules.txt \
+     -M supplemental/manual-mapping.xml \
+     -F vxc.match.all -Aa -Sd > vxc.output.all 2> vxc.discards.all
+

@@ -1,0 +1,219 @@
+
+======================================================
+===== Unified Verb Index Generator (UVIG) README =====
+======================================================
+
+* This document explains how to use the UVIG.
+* This document gives tips on how to modify the UVIG.
+* This document describes the data sources that comprise the UVI.
+
+to be completed eventually.....  DT
+
+note in here somewhere:   doesn't make sense to release this code for public consumption.  The Inspector yes, but not the UVIG.
+reason for orig- directory
+
+what to change if the format of one of the external file changes.
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+  JUMP START: If you are only reading this README to generate new HTML files
+  from updated VerbNet XML files or other sources, this command may prove
+  helpful.  It is an example of what you might execute.  Replace paths and
+  flags for your situation (these two lines are part of one command):
+
+    java UVI.Generator -oqs /home/verbs/shared/verbnet/release-newest
+                /home/verbs/shared/public_html/verb-index
+  -or-
+    run -oqs /home/verbs/shared/verbnet/release-newest ..
+    (when using script in /home/verbs/shared/public_html/verb-index/generator)
+  -or-
+    run-public
+    (when using script in /home/verbs/shared/public_html/verb-index/generator)
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+
+Table of Contents
+-----------------
+1.  Usage and Flags
+2.  User Guide
+3.  Supplemental Files
+4.  Error-Checking
+5.  Data Sources
+   A.  VerbNet
+   B.  PropBank
+   C.  FrameNet
+   D.  WordNet
+   E.  VerbNet-FrameNet mappings (Andrew Dolbey)
+6.  User List
+7.  Developer
+   A.  UVIG Directory Structure
+   B.  Javadoc
+   C.  CSS
+   D.  XSLT
+   E.  Users
+   F.  Security
+
+add comments to this list?
+
+TALK ABOUT all-comments-copy.backup
+talk about how comments entry is both HTML and simple text supportive, so there is a conflict with how the carriage returns are represented.  hard to ask the user to insert ehri own breaks and hard to not insert hte breaks for them for simple text (edward's UL problem)
+
+Chapter 1: Usage and Flags
+--------------------------
+how to use, execute
+flags/usage
+ compile script available
+ run script available
+
+/usr/java/j2sdk1.4.2_08/jre/lib/rt.jar
+javac -d . -classpath /usr/java/j2sdk1.4.2_08/jre/lib/rt.jar src/*
+
+should probably create gop and goc for them cause of this RT issue
+
+Chapter 2: User Guide
+---------------------
+what the * means
+
+Chapter 3: Supplemental Files
+-----------------------------
+what files should be present
+explanation of the suppl files, what you can do with them
+format of the suppl files
+
+you can always provide updated information by placing the new file (of the same format)
+into the supplemental directory with the correct file name, and re-running the output
+tool.  Re-running the tool does not erase user lists or comments - it just reconstructs
+the web pages with the updated data sources.
+
+originals are in originals-Sept-2006
+
+so you can revert back to them if something happens
+
+all have .s extension
+
+
+
+Chapter 4: Error-Checking
+-------------------------
+how much idiot proofing there is
+the kind of error checking that takes place on the XML files
+that there should be a DTD located in the directory. (and how the tool will handle lack thereof)
+   all errors to stderror (and include in README that's where it's going)
+   all the different types of errors that it catches (and what it won't catch, aka what it doesn't know to look for)
+
+
+Chapter 5: Data Sources
+-----------------------
+
+propbank.s is CSV  verb,url
+
+a change to the format of one of these files could require a change in the java code
+
+Original name for vn-fn.s is VNclass-FNframeMappings.xml.  8/28/06  no changes necessary to the file
+  docroot verbnet-framenet_MappingData
+  DS and NA are ignored
+
+framenet verbLexEntries.xml, docroot framenet1.2_verbLexEntries
+I added a DTD specification inside the file:
+      <?xml version="1.0"?>
+      <!DOCTYPE framenet1.2_verbLexEntries  [
+        <!ELEMENT framenet1.2_verbLexEntries (lexical-entry+)>
+        <!ELEMENT lexical-entry   (#PCDATA)>
+
+        <!ATTLIST lexical-entry ID CDATA #REQUIRED>
+        <!ATTLIST lexical-entry name CDATA #REQUIRED>
+        <!ATTLIST lexical-entry frame CDATA #REQUIRED>
+        <!ATTLIST lexical-entry pos CDATA #REQUIRED>
+        <!ATTLIST lexical-entry incorporatedFE CDATA #REQUIRED>
+      ]>
+AND I HAD TO CLOSE each lexial-entry node by adding /> at the end instead of just > (so it passes the parser).  All TEST's were removed.
+
+   VerbNet--->|
+   PropBank-->|
+   FrameNet-->|---> UVIG ---> PHP ---> HTML
+   WordNet--->|
+   VN-FN----->|
+
+
+PropBank
+
+If you take the current index HTML files in the current UVI, you get 3313 total PropBank links/verbs.
+But then you delete 'breath' cause it's not a verb.  so you have 3312 verbs in the current UVI. Call this file A
+
+Then you go to the current ..../framesets/ directory on verbs' web server. you do an ls -l > xx
+you delete the first line
+you delete all files that have 0 size (*hopefully* these are the only configuration files, since all files
+regardless of their meaning have a -v on them)
+this gives you 3633 HTML verb files  call this file B
+
+you can transform this file into a file of the form:
+  verb,http://verbs.colorado.edu/framesets/verb-v.html
+
+do the same with the file A
+sort them both just in case - IMPORTANT STEP
+then do a diff
+
+ Lines in fs.ready-index.sorted: 3633
+ Lines in uvi.ready-index.sorted: 3312
+ Identical lines: 3312
+ Lines in fs.ready-index.sorted not in uvi.ready-index.sorted: 321
+ Lines in uvi.ready-index.sorted not in fs.ready-index.sorted: 0
+ Percent of lines fs.ready-index.sorted in uvi.ready-index.sorted: 91.16%
+ Percent of lines uvi.ready-index.sorted in fs.ready-index.sorted: 100.00%
+
+The prognosis is good, the current frameset files do indeed have all the original propbank files and more.
+
+the file fs.ready-index.sorted was copied into propbank.s on 2006.8.26 at 18:43.  this will be the input for the
+initial set of HTML files for the new UVI.
+
+Chapter 6: User List
+--------------------
+
+
+Chapter 7: Developer
+--------------------
+
+ - reason for so much staticness
+ - how to recompile
+ - how to make changes
+ - how to regen the javadoc
+ compile script available
+ run script available
+
+ include the javadoc scripts to regenerate the jd html pages, explain what each option does
+ cp src/*.java UVI
+javadoc -author -version -linkoffline http://java.sun.com/j2se/1.5.0/docs/api http://java.sun.com/j2se/1.5.0/docs/api -d javadoc -private UVI
+
+ create 'create-javadoc' script in generator/ directory??
+
+importance of:
+chgrp -R www *
+ everything is group www so all in that group can access and change th efiles.
+chmod -R g+w *
+ anytime you add a file to this directory, good to give the www group write rights
+
+ - what code to change if the format of a supplemental file has changed.
+
+CSS
+
+ show actual, not just super class, could be listed twice on the index
+
+how to view the javadoc for the java program
+
+all files in the supplemental directory tree are put into a single directory (without subdirectories)
+ so if you have a x.jpg in supplemental/ and an x.jpg in supplemental/images/, there will be a conflict.
+
+security features
+
+verb-index
+  comments
+  generator
+    src
+    supplemental
+      images
+      originals-Sept-2006
+    UVI
+    javadoc
+  users
+
+   all errors to stderror (and include in README that's where it's going)
+

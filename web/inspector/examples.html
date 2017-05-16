@@ -1,0 +1,358 @@
+
+<HTML>
+   <HEAD>
+      <TITLE>Inspector: Examples</TITLE>
+      <STYLE type='text/css'>
+         .OutsideTable
+         {
+            border: 1px black solid;
+         }
+         .TitleTD
+         {
+            font-size:    16pt;
+            font-variant: small-caps;
+            text-align:   center;
+         }
+         .TextBody
+         {
+            text-align: justify;
+         }
+         .CN
+         {
+            font-family: 'Courier New';
+         }
+         A
+         {
+            font-family:     Tahoma;
+            font-variant:    small-caps;
+            font-weight:     bold;
+            text-decoration: none;
+         }
+         A:link    { color: red;     }
+         A:visited { color: red;     }
+         A:hover   { color: #BB2345; }
+         .Resource
+         {
+            font-variant: small-caps;
+            text-decoration: underline;
+         }
+      </STYLE>
+   </HEAD>
+   <BODY bgcolor='#C3FFC3'>
+      <BR>
+      <TABLE align='center' width='700px' cellpadding=10 class='OutsideTable'>
+         <TR bgcolor='springgreen'>
+            <TD class='TitleTD'>Inspector: Examples</TD>
+         </TR>
+         <TR bgcolor='white'>
+            <TD>
+               <TABLE cellpadding=10>
+                  <TR valign='top'>
+                     <TD class='TextBody' width='50%'>
+                        The Inspector acts as a VerbNet viewer.  The following are instances of example output preceded
+                        by the commands that generated them.  Although these commands
+                        utilize the -O operator so as to generate reasonably sized
+                        output for this web page, you can eliminate this
+                        operator to force the Inspector to process every single
+                        XML file in VerbNet.  Remember that the usefulness of the Inspector console output
+                        can be enhanced with standard tools like <I>grep</I> and <I>sed</I>, 
+                        if you have access to them.  Refer to the Inspector's <A href='usage.html'>usage</A>
+                        for additional information.<BR><BR>
+                        <TABLE align='center' width='600px' style='border: 1px #000000 solid' cellpadding=7 bgcolor='#EEEEEE'>
+                           <TR><TD align='center'><CODE>java vn.Inspector ./xml -i -Va -Omine-10.9.xml</CODE></TD></TR>
+                           <TR><TD align='center'>just mine-10.9.xml, indented output, show all standard elements</TD></TR>
+                        </TABLE>
+<TABLE align='center' width='600px'><TR><TD>
+<PRE>
+--- Inspector: Header ---------------------------------------->
+| XML Input Directory:    /home/shared/verbnet/xml
+| Flags:                  i
+| View Options:           a
+| Only These Files:       mine-10.9.xml
+| Executed On:            Sun Oct 15 11:05:20 MST 2006
+-------------------------------------------------------------->
+FILE: mine-10.9.xml
+   CLASS: mine-10.9 [Members: 2, Frames: 2]
+      MEMBER: mine (wn=mine%2:34:00)
+      MEMBER: quarry (wn=quarry%2:34:00)
+      THEMROLE: Agent [+animate | +organization] 
+      THEMROLE: Theme [+concrete] 
+      THEMROLE: Source [+location] 
+      FRAME: [Basic Transitive]
+         EXAMPLE: The men mined the gold.
+         SYNTAX: %Agent V %Theme 
+         SEMANTIC PRED: cause(Agent, E)
+         SEMANTIC PRED: location(start(E), Theme, ?Source)
+         SEMANTIC PRED: not(location(end(E), Theme, ?Source))
+      FRAME: [PP // source-PP]
+         EXAMPLE: The men mined the gold from the abandoned mine.
+         SYNTAX: %Agent V %Theme {{+src}} %Source 
+         SEMANTIC PRED: cause(Agent, E)
+         SEMANTIC PRED: location(start(E), Theme, Source)
+         SEMANTIC PRED: not(location(end(E), Theme, Source))
+--- Final Counts ---------
+| FILE:                1 |
+| CLASS:               1 |
+| MEMBER:              2 |
+| THEMROLE:            3 |
+| FRAME:               2 |
+| EXAMPLE:             2 |
+| SYNTAX:              2 |
+| SEMANTIC PRED:       6 |
+--------------------------
+</PRE>
+</TD></TR></TABLE>
+
+                        <BR>
+                        <TABLE align='center' width='600px' style='border: 1px #000000 solid' cellpadding=7 bgcolor='#EEEEEE'>
+                           <TR><TD align='center'><CODE>java vn.Inspector ./xml -i -Vcres -Ospray</CODE></TD></TR>
+                           <TR><TD align='center'>just spray file, indented output, show classes, subclasses, frames, examples, and semantics</TD></TR>
+                        </TABLE>
+<TABLE align='center' width='600px'><TR><TD>
+<PRE>
+--- Inspector: Header ---------------------------------------->
+| XML Input Directory:    /home/shared/verbnet/xml
+| Flags:                  i
+| View Options:           cres
+| Only These Files:       spray
+| Executed On:            Sun Oct 15 11:06:01 MST 2006
+-------------------------------------------------------------->
+CLASS: spray-9.7
+   FRAME: [NP-PP // locative-PP]
+      EXAMPLE: Jessica loaded boxes into the wagon.
+      SEMANTIC PRED: motion(during(E), Theme)
+      SEMANTIC PRED: not(Prep(start(E), Theme, Destination))
+      SEMANTIC PRED: Prep(end(E), Theme, Destination)
+      SEMANTIC PRED: cause(Agent, E)
+   FRAME: [NP-PP // Location Object, with-PP]
+      EXAMPLE: Jessica loaded the wagon with boxes.
+      SEMANTIC PRED: motion(during(E), Theme)
+      SEMANTIC PRED: not(location(start(E), Theme, Destination))
+      SEMANTIC PRED: location(end(E), Theme, Destination)
+      SEMANTIC PRED: cause(Agent, E)
+   FRAME: [Transitive // Theme Object]
+      EXAMPLE: Jessica squirted water.
+      SEMANTIC PRED: motion(during(E), Theme)
+      SEMANTIC PRED: not(location(start(E), Theme, ?Destination))
+      SEMANTIC PRED: location(end(E), Theme, ?Destination)
+      SEMANTIC PRED: cause(Agent, E)
+   FRAME: [Transitive // Destination Object]
+      EXAMPLE: Jessica sprayed the wall.
+      SEMANTIC PRED: motion(during(E), ?Theme)
+      SEMANTIC PRED: not(location(start(E), ?Theme, Destination))
+      SEMANTIC PRED: location(end(E), ?Theme, Destination)
+      SEMANTIC PRED: cause(Agent, E)
+   SUBCLASS: spray-9.7-1
+      FRAME: [PP // locative-PP]
+         EXAMPLE: Paint sprayed onto the wall.
+         SEMANTIC PRED: motion(during(E), Theme)
+         SEMANTIC PRED: not(Prep(start(E), Theme, Destination))
+         SEMANTIC PRED: Prep(end(E), Theme, Destination)
+      FRAME: [Conative]
+         EXAMPLE: Jessica squirted water at me.
+         SEMANTIC PRED: motion(during(E), Theme)
+         SEMANTIC PRED: not(location(start(E), Theme, Destination))
+         SEMANTIC PRED: cause(Agent, E)
+      SUBCLASS: spray-9.7-1-1
+         FRAME: [Transitive // Theme subject]
+            EXAMPLE: Crowds packed the stands.
+            SEMANTIC PRED: location(during(E), Theme, Destination)
+   SUBCLASS: spray-9.7-2
+      &lt;NO FRAMES>
+--- Final Counts ---------
+| CLASS:               1 |
+| SUBCLASS:            3 |
+| FRAME:               7 |
+| EXAMPLE:             7 |
+| SEMANTIC PRED:      23 |
+--------------------------
+</PRE>
+</TD></TR></TABLE>
+                        <BR>
+                        <TABLE align='center' width='600px' style='border: 1px #000000 solid' cellpadding=7 bgcolor='#EEEEEE'>
+                           <TR><TD align='center'><CODE>java vn.Inspector ./xml -i -Vfcm -Obr</CODE></TD></TR>
+                           <TR><TD align='center'>files beginning with br, indented output, show files, classes, subclasses, and members</TD></TR>
+                        </TABLE>
+<TABLE align='center' width='600px'><TR><TD>
+<PRE>
+--- Inspector: Header ---------------------------------------->
+| XML Input Directory:    /home/shared/verbnet/xml
+| Flags:                  i
+| View Options:           fcm
+| Only These Files:       br
+| Executed On:            Sun Oct 15 11:06:50 MST 2006
+-------------------------------------------------------------->
+FILE: braid-41.2.2.xml
+   CLASS: braid-41.2.2
+      MEMBER: bob
+      MEMBER: braid
+      MEMBER: brush
+      MEMBER: clip
+      MEMBER: coldcream
+      MEMBER: comb
+      MEMBER: condition
+      MEMBER: crimp
+      MEMBER: crop
+      MEMBER: curl
+      MEMBER: cut
+      MEMBER: dye
+      MEMBER: file
+      MEMBER: henna
+      MEMBER: lather
+      MEMBER: manicure
+      MEMBER: part
+      MEMBER: perm
+      MEMBER: plait
+      MEMBER: pluck
+      MEMBER: powder
+      MEMBER: rinse
+      MEMBER: rouge
+      MEMBER: set
+      MEMBER: shampoo
+      MEMBER: soap
+      MEMBER: talc
+      MEMBER: tease
+      MEMBER: towel
+      MEMBER: trim
+      MEMBER: wave
+FILE: break-45.1.xml
+   CLASS: break-45.1
+      MEMBER: break
+      MEMBER: chip
+      MEMBER: crack
+      MEMBER: crash
+      MEMBER: crush
+      MEMBER: fracture
+      MEMBER: rip
+      MEMBER: shatter
+      MEMBER: smash
+      MEMBER: snap
+      MEMBER: splinter
+      MEMBER: split
+      MEMBER: tear
+FILE: breathe-40.1.2.xml
+   CLASS: breathe-40.1.2
+      MEMBER: bleed
+      MEMBER: dribble
+      MEMBER: drool
+      MEMBER: puke
+      MEMBER: spit
+      MEMBER: sweat
+      MEMBER: vomit
+      MEMBER: weep
+      SUBCLASS: breathe-40.1.2-1
+         MEMBER: breathe
+         MEMBER: cough
+         MEMBER: cry
+         MEMBER: defecate
+         MEMBER: expectorate
+         MEMBER: retch
+         MEMBER: slobber
+         MEMBER: urinate
+FILE: bring-11.3.xml
+   CLASS: bring-11.3
+      MEMBER: take
+      SUBCLASS: bring-11.3-1
+         MEMBER: bring
+--- Final Counts ---------
+| FILE:                4 |
+| CLASS:               4 |
+| SUBCLASS:            2 |
+| MEMBER:             62 |
+--------------------------
+</PRE>
+</TD></TR></TABLE>
+                        <BR>
+                        <TABLE align='center' width='600px' style='border: 1px #000000 solid' cellpadding=7 bgcolor='#EEEEEE'>
+                           <TR><TD align='center'><CODE>java vn.Inspector ./xml -i -Vcq -Ocare</CODE></TD></TR>
+                           <TR><TD align='center'>just care file, indented output, show classes, subclasses, and verb-frame pairs</TD></TR>
+                        </TABLE>
+<TABLE align='center' width='600px'><TR><TD>
+<PRE>
+--- Inspector: Header ---------------------------------------->
+| XML Input Directory:    /home/shared/verbnet/xml
+| Flags:                  i
+| View Options:           cq
+| Only These Files:       care
+| Executed On:            Sun Oct 15 11:43:50 MST 2006
+-------------------------------------------------------------->
+CLASS: care-88
+   VF-PAIR: VERB: mind FRAME: [Basic Intransitive]
+   VF-PAIR: VERB: mind FRAME: [S]
+   VF-PAIR: VERB: mind FRAME: [WH-S]
+   SUBCLASS: care-88-1
+      VF-PAIR: VERB: care FRAME: [Basic Intransitive]
+      VF-PAIR: VERB: care FRAME: [S]
+      VF-PAIR: VERB: care FRAME: [WH-S]
+      VF-PAIR: VERB: care FRAME: [P-WHAT-S // about-PP]
+      VF-PAIR: VERB: care FRAME: [WHAT-S]
+      VF-PAIR: VERB: care FRAME: [P-WH-S // about-PP]
+      VF-PAIR: VERB: worry FRAME: [Basic Intransitive]
+      VF-PAIR: VERB: worry FRAME: [S]
+      VF-PAIR: VERB: worry FRAME: [WH-S]
+      VF-PAIR: VERB: worry FRAME: [P-WHAT-S // about-PP]
+      VF-PAIR: VERB: worry FRAME: [WHAT-S]
+      VF-PAIR: VERB: worry FRAME: [P-WH-S // about-PP]
+      VF-PAIR: VERB: wonder FRAME: [Basic Intransitive]
+      VF-PAIR: VERB: wonder FRAME: [S]
+      VF-PAIR: VERB: wonder FRAME: [WH-S]
+      VF-PAIR: VERB: wonder FRAME: [P-WHAT-S // about-PP]
+      VF-PAIR: VERB: wonder FRAME: [WHAT-S]
+      VF-PAIR: VERB: wonder FRAME: [P-WH-S // about-PP]
+--- Final Counts ---------
+| CLASS:               1 |
+| SUBCLASS:            1 |
+| VF-PAIR:            21 |
+--------------------------
+</PRE>
+</TD></TR></TABLE>
+
+
+                        <BR>Below are some further examples, without the output listed, that show how
+                        <I>grep</I> can be used to increase the effectiveness of the Inspector tool.  
+                        The Inspector, by itself, simply scans VerbNet XML files and prints simple-text
+                        representations of the XML within.  Using <I>grep</I>, one can extract even more
+                        precisely what is desired.  The first example shows the Inspector listing 
+                        every single member in VerbNet (along with classes and subclasses), while suppressing the header and final counts,
+                        and passing its output onto <I>grep</I>, which looks for underscores (VerbNet uses underscores
+                        to represent verb-particle constructions).<BR><BR>
+                        If you wanted to know what class each printed verb-particle construction was in, however,
+                        it would be difficult given that you don't where the class line was printed in relation 
+                        to the member in question.  That is where the -r flag comes in.  It replicates
+                        certain labels before every label that is printed.  In other words, before each
+                        member is printed, the class is printed before it.  This generates a good deal more output
+                        but is perfect for using with <I>grep</I>.  Since you know that a class label will be printed 
+                        before each and every member label, you can use <I>grep</I>'s -B option to list the class as well.
+                        This is a general technique that can be used on any other Inspector output as well, not just
+                        classes and members.
+
+                        <BR>
+                        <BR>
+                        <TABLE align='center' width='600px' style='border: 1px #000000 solid' cellpadding=7 bgcolor='#EEEEEE'>
+                           <TR><TD align='center'><CODE>java vn.Inspector ./xml -hn -Vcm | grep 'MEMBER.*_'</CODE></TD></TR>
+                           <TR><TD align='center'>all verb-particle constructions</TD></TR>
+                        </TABLE>
+                        <BR>
+                        <TABLE align='center' width='600px' style='border: 1px #000000 solid' cellpadding=7 bgcolor='#EEEEEE'>
+                           <TR><TD align='center'><CODE>java vn.Inspector ./xml -irhn -Vcm | grep -B1 'MEMBER.*_'</CODE></TD></TR>
+                           <TR><TD align='center'>all verb-particle constructions preceded by the class or subclass each is in</TD></TR>
+                        </TABLE>
+                        <BR>
+                        <TABLE align='center' width='600px' style='border: 1px #000000 solid' cellpadding=7 bgcolor='#EEEEEE'>
+                           <TR><TD align='center'><CODE>java vn.Inspector ./xml -irhn -Vcrxyz | grep -B2 'SYNTAX.*{.* V'</CODE></TD></TR>
+                           <TR><TD align='center'>all syntaxes which contain a preposition before the verb, preceded by the class or subclass and frame in which the syntax is contained</TD></TR>
+                        </TABLE>
+
+                     </TD>
+                  </TR>
+               </TABLE>
+            </TD>
+         </TR>
+         <TR bgcolor='mediumseagreen'>
+            <TD>This page created on 2006.10.15.</TD>
+         </TR>
+      </TABLE>
+      <BR>
+   </BODY>
+</HTML>
+

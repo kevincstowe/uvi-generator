@@ -1,0 +1,28 @@
+
+################
+## Run Script ##
+################
+
+# This script runs the UVIG tool.
+#
+# For example, you could type the following commands:
+# (the first example below is probably the most commonly desired use
+# of this script assuming 1) this script and code still reside
+# on 'verbs' in their original location so that .. still works correctly
+# and 2) the symbolic link 'release-newest' is still maintained
+# to point to the most recent version of the VerbNet XML files)
+#
+#    run-uvig -os /home/verbs/shared/verbnet/release-newest ..
+#    run-uvig /home/verbs/shared/verbnet/release2.0-derek-clean .. -o -v -s
+#    run-uvig myXML-dir -goqs newHTML
+#
+# For additional information, check the usage note:
+#
+#    run-uvig -?
+#    run-uvig --help
+
+PROJ_DIR=$(cd `dirname "$0"` && cd ../.. && echo "$PWD")
+CLASS_PATH="$PROJ_DIR/bin:$PROJ_DIR/lib/sfcc_1.1.jar"
+APP_NAME="semlink.apps.uvig.Generator"
+
+java -cp "$CLASS_PATH" "$APP_NAME" "$@"

@@ -1,0 +1,46 @@
+# this script should be executed from within the verb-index/vxc directory.
+# include how made .zip file
+
+# Compile VxC.
+compile
+
+# Create a brand new download directory.
+rm -rf download
+mkdir download
+
+# Create the 'download/vxc' directory.
+cd download
+mkdir vxc
+
+# Copy source code, compiled code, Javadoc documentation,
+# supplemental files and README to 'download/vxc' directory.
+cp -r ../src vxc
+cp -r ../vn vxc
+cp -r ../javadoc vxc
+cp -r ../supplemental vxc
+cp -r ../results vxc
+cp ../README vxc
+
+#TEMPORARY STATEMENTS don't let the world see a weird, unfinished readme.
+echo 'README not complete. Check online Javadoc documentation and usage notes for now.  Thank you.  Cyc rules are copyright 1995-2006 Cycorp' > vxc/README
+
+# Copy over the example UNIX scripts. 
+cp ../scripts/* vxc
+
+# Delete all '.DS_Store' files in the download directory.  These can appear
+# when someone using an Apple computer uploads files (like me).
+find vxc -name '.DS_Store' -exec rm {} \;
+
+# Create tarball of 'download/vxc' directory.
+tar cvf vxc.tar vxc
+
+# Zip the tarball just created.
+gzip vxc.tar
+
+# Make sure the permissions and group are correct for all files in 
+# VxC directory.  The creation of new files makes files without
+# the proper settings.
+cd ..
+chgrp -R www *
+chmod -R g-w *
+

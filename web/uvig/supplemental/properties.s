@@ -1,0 +1,56 @@
+
+# UVI Properties File
+
+# This file allows you to easily change specific values that the
+# UVI Generator will use when generating the UVI web site.
+# Only certain properties are recognized and all must be
+# specified in key=value format.  The currently-supported
+# properties are:
+#   vnVersion
+#      Must be set to a value like '2.3' or '2.4' which corresponds
+#      to the version of VerbNet with which you built the UVI and
+#      will be shown at the top of the VerbNet class pages.
+#   vnFlavorName
+#      This is the name of the VerbNet-formatted lexicon that you
+#      would like to have displayed on the top of all automatically
+#      generated class pages.  This feature was added so external
+#      groups could use the UVIG for their own lexica.
+#   wnVersion
+#      The version of WordNet used to create the 'wordnet.s'
+#      supplemental file.  The 'wordnet.s' file is a copy of the
+#      'index.sense' file from WordNet.  This value is shown at
+#      the top of the WordNet Viewer pages (that appear when
+#      you click on the WordNet sense number links).
+#   fnVersion
+#      The version of FrameNet as used in the main source file
+#      ('framenet.s') and the mapping file ('vn-fn.s').  This
+#      value is not yet used in the UVI at this point.
+#   fnUrlPattern
+#      This is the URL pattern used to turn FN frame names into
+#      URLs that will be generated and accessible to the users.
+#      Place a "{1}" wherever in the URL where the FN frame name
+#      is to be inserted.
+#   indexBanner
+#      Can be blank or not even specified.  When specified and non-
+#      blank, will show an obvious banner on the UVI's index page
+#      to draw attention to important messages you want users of
+#      the UVI to be aware of.  The text is placed directly onto
+#      the webpage so you can use HTML in the text.
+# Lastly, if you need the '=' character (equals sign) in the value
+# of a property, it must be preceded by a '\' character (backslash)
+# to distinguish it from the equals sign used to define a new
+# property.
+
+vnVersion=3.2
+
+vnFlavorName=VerbNet
+
+wnVersion=3.0
+
+fnVersion=1.3
+
+fnUrlPattern=https://framenet2.icsi.berkeley.edu/fnReports/data/frame/{1}.xml
+
+	indexBanner=<U>Special Notice:</U> This is the 3.3 release. <br>Many changes have been implemented : path_rel semantics, initial lexical features, and<br> many updates to classes, frames, and members. Full documentation is forthcoming. <BR>We gratefully acknowledge the support of the<BR>National Science Foundation Grant NSF-IIS-1116782,<BR>A Bayesian Approach to Dynamic Lexical Resources for Flexible Language Processing.<BR>Any opinions, findings, and conclusions or recommendations<BR>expressed in this material are those of the authors and do not<BR>necessarily reflect the views of the National Science Foundation.
+
+refPageInfo=<U>Frame Types:</U><BR>Primary frame names are flat phrase-structure representations of the frames, intended to be generalizable across classes.  Some of the names include dot-extensions that indicate a thematic role type or underscore-extensions that indicate a complement type. These extensions can be used to subdivide frame types or ignored to use more general frame types. The names are a revision of the previous naming system, in which frames had both descriptive primary names and more specific secondary names that subdivided the frame types.  The downloadable .xml files of the classes include the old primary and secondary names in the "secondary" feature, for those who still wish to use the information.  The web pages do not display them, but they are included here for reference.

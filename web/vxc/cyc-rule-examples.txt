@@ -1,0 +1,128 @@
+The following is a small selection of verbSemTrans rules from
+ResearchCyc for illustration purposes.
+
+
+[Mon](verbSemTrans Get-TheWord 5 TransitiveNPFrame
+       (and
+           (isa :ACTION GainingUserRights)
+           (toPossessor :ACTION :SUBJECT)
+           (objectOfPossessionTransfer :ACTION :OBJECT)))
+[Def](verbSemTrans Disappear-TheWord 0 IntransitiveVerbFrame
+       (and
+           (isa :ACTION DisappearingFromSight)
+           (hiddenObject :ACTION :SUBJECT)))
+[Inf](verbSemTrans Blow-TheWord 1
+       (PPCompFrameFn DitransitivePPFrameType Out-Of-MWW)
+       (and
+           (isa :ACTION ShapingByBlowing)
+           (inputsCommitted :ACTION :OBLIQUE-OBJECT)
+           (outputsCreated :ACTION :OBJECT)
+           (doneBy :ACTION :SUBJECT)))
+[Inf](verbSemTrans Strain-TheWord 1 IntransitiveVerbFrame
+       (and
+           (isa :ACTION FluidFiltrationProcess-Artificial)
+           (objectMoving :ACTION :SUBJECT)))
+[Def](verbSemTrans Spout-TheWord 0 IntransitiveVerbFrame
+       (and
+           (isa :ACTION FluidFlow-Translation)
+           (emitter :ACTION :SUBJECT)))
+[Def](verbSemTrans Put-TheWord 1
+       (ParticleCompFrameFn TransitiveParticleNPFrameType Together-TheWord)
+       (and
+           (isa :ACTION Assembling)
+           (outputs :ACTION :OBJECT)
+           (performedBy :ACTION :SUBJECT)))
+[Inf](verbSemTrans Deck-TheWord 0
+       (PPCompFrameFn DitransitivePPFrameType With-TheWord)
+       (and
+           (isa :ACTION DecoratingWithObjects)
+           (isa :OBLIQUE-OBJECT Decoration)
+           (performedBy :ACTION :SUBJECT)
+           (toLocation :ACTION :OBJECT)
+           (objectMoving :ACTION :OBLIQUE-OBJECT)))
+[Def](verbSemTrans Surround-TheWord 2 TransitiveNPFrame
+       (surrounds-3D :SUBJECT :OBJECT))
+[Def](verbSemTrans Hear-TheWord 0 TransitiveNPFrame
+       (hears :SUBJECT :OBJECT))
+[Inf](verbSemTrans Retreat-TheWord 1
+       (PPCompFrameFn TransitivePPFrameType From-TheWord)
+       (and
+           (isa :ACTION RetreatingFromAnArea)
+           (fromLocation :ACTION :OBLIQUE-OBJECT)
+           (doneBy :ACTION :SUBJECT)))
+[Def](verbSemTrans See-TheWord 5 TransitiveNPFrame
+       (and
+           (isa :ACTION SeeingSocially-VisitingSomeone)
+           (performedBy :ACTION :SUBJECT)
+           (toLocation :ACTION :OBJECT)))
+[Inf](verbSemTrans Pierce-TheWord 0 MiddleVoiceFrame
+       (and
+           (isa :ACTION Piercing)
+           (objectOfStateChange :ACTION :SUBJECT)))
+[Def](verbSemTrans Infect-TheWord 0
+       (PPCompFrameFn DitransitivePPFrameType With-TheWord)
+       (and
+           (infectionTypeTransmittedDuring :ACTION :OBL-OBJ-COL)
+           (transmissionToHost :ACTION :OBJECT)
+           (transmissionFromHost :ACTION :SUBJECT)
+           (isa :ACTION
+               (InfectingFn :OBL-OBJ-COL))))
+[Mon](verbSemTrans Keep-TheWord 5 DitransitiveNP-ADJPFrame
+       (and
+           (isa :ACTION KeepingInACertainState)
+           (performedBy :ACTION :SUBJECT)
+           (objectActedOn :ACTION :OBJECT)
+           (holdsIn :ACTION
+               (isa :OBJECT :ADJ))))
+[Def](verbSemTrans Describe-TheWord 1 TransitiveNPFrame
+       (and
+           (isa :ACTION DescribingAnObject)
+           (informationOrigin :ACTION :SUBJECT)
+           (describedObject :ACTION :OBJECT)))
+[Def](verbSemTrans Raft-TheWord 0
+       (PPCompFrameFn TransitivePPFrameType To-TheWord)
+       (and
+           (isa :ACTION Rafting)
+           (passengers :ACTION :SUBJECT)
+           (toLocation :ACTION :OBLIQUE-OBJECT)))
+[Inf](verbSemTrans Suckle-TheWord 0 IntransitiveVerbFrame
+       (and
+           (isa :ACTION NursingYoung)
+           (objectMoving :ACTION :SUBJECT)))
+[Def](verbSemTrans Keep-TheWord 5 TransitiveNPFrame
+       (and
+           (isa :ACTION Keeping-ProvidingLodging)
+           (performedBy :ACTION :SUBJECT)
+           (objectActedOn :ACTION :OBJECT)))
+[Def](verbSemTrans Solder-TheWord 0 TransitiveNPFrame
+       (and
+           (performedBy :ACTION :SUBJECT)
+           (objectActedOn :ACTION :OBJECT)
+           (isa :ACTION
+               (UsingAFn SolderingIron))))
+[Def](verbSemTrans Photograph-TheWord 0 TransitiveNPFrame
+       (and
+           (isa :ACTION TakingAPhotograph-FilmCamera)
+           (performedBy :ACTION :SUBJECT)
+           (topicOfInfoTransfer :ACTION :OBJECT)))
+[Inf](verbSemTrans Choke-TheWord 1 TransitiveNPFrame
+       (and
+           (isa ?BLOCKAGE BarrierSituation)
+           (barrier ?BLOCKAGE :SUBJECT)
+           (blockedPath ?BLOCKAGE :OBJECT)))
+[Def](verbSemTrans Rent-TheWord 0 DitransitiveNP-NPFrame
+       (rentsFrom :INDIRECT-OBJECT :OBJECT :SUBJECT))
+[Inf](verbSemTrans Pitch-TheWord 0 DitransitiveNP-NPFrame
+       (and
+           (isa :ACTION BaseballDelivery)
+           (performedBy :ACTION :SUBJECT)
+           (objectActedOn :ACTION :OBJECT)
+           (toLocation :ACTION :INDIRECT-OBJECT)))
+[Inf](verbSemTrans Shock-TheWord 1 IntransitiveVerbFrame
+       (and
+           (isa :ACTION ElectricShock)
+           (primaryObjectMoving :ACTION :SUBJECT)))
+[Inf](verbSemTrans Topple-TheWord 0 IntransitiveVerbFrame
+       (and
+           (isa :ACTION TippingOver)
+           (objectMoving :ACTION :SUBJECT)))

@@ -1,0 +1,39 @@
+
+################
+## Run Script ##
+################
+
+# This script runs the GroupingUpdater application in the semlink-java project.
+#
+# This script uses a path relative to the project and cannot be used via
+# a symbolic link.
+#
+# Here are the two primary uses of this tool, as examples:
+# (the first example below just prints a report about the update
+# instead of producing the updated files and the second
+# example prints a report and produces updated files).
+#
+#    run-gu ~/svn/verbnet/trunk ~/svn/sense-inventories
+#       /usr/local/WordNet-3.0/dict/index.sense
+#    run-gu -no ~/svn/verbnet/trunk ~/svn/sense-inventories
+#       /usr/local/WordNet-3.0/dict/index.sense ~/my-updated-vn
+#
+#    -n means a new, updated set of VerbNet XML files are desired
+#    -o means overwrite any existing files in my supplied output directory
+#
+# For additional information, check the usage note:
+#
+#    run-gu -?
+
+PROJ_DIR=$(cd `dirname "$0"` && cd ../.. && echo "$PWD")
+CLASS_PATH="$PROJ_DIR/bin:$PROJ_DIR/lib/sfcc_1.1.jar"
+APP_NAME="semlink.apps.gu.GroupingUpdater"
+
+java -cp "$CLASS_PATH" "$APP_NAME" "$@"
+
+# Examples
+
+#FLAGS="-no"
+#java -cp "$CLASS_PATH" "$APP_NAME" "$FLAGS" ~/Veritas/School/Thesis/VerbNet/X/xml13 ~/Veritas/School/Thesis/Groupings/sense-inventories index.sense testOutputDir > z3.txt
+#java -cp "$CLASS_PATH" "$APP_NAME" "$FLAGS" ~/lnk/vn/release-newest ~/svn/sense-inventories /usr/local/WordNet-3.0/dict/index.sense ~/lnk/vn/zgu-new > ~/lnk/vn/ygu-new
+#vn_gu "$FLAGS" ~/lnk/vn/release-newest ~/svn/sense-inventories /usr/local/WordNet-3.0/dict/index.sense ~/lnk/vn/zgu-old > ~/lnk/vn/ygu-old

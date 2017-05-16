@@ -1,0 +1,262 @@
+
+<HTML>
+   <HEAD>
+      <TITLE>VxC: Results</TITLE>
+      <STYLE type='text/css'>
+         .OutsideTable
+         {
+            border: 1px black solid;
+         }
+         .TitleTD
+         {
+            font-size:    16pt;
+            font-variant: small-caps;
+            text-align:   center;
+         }
+         .TextBody
+         {
+            text-align: justify;
+         }
+         .CN
+         {
+            font-family: 'Courier New';
+         }
+         A
+         {
+            font-family:     Tahoma;
+            font-variant:    small-caps;
+            font-weight:     bold;
+            text-decoration: none;
+         }
+         A:link    { color: red;     }
+         A:visited { color: red;     }
+         A:hover   { color: #BB2345; }
+         .Resource
+         {
+            font-variant: small-caps;
+            text-decoration: underline;
+         }
+         .constraint
+         {
+            font-weight: bold;
+         }
+         .mn
+         {
+            font-family:"courier new";
+         }
+         .tr
+         {
+            font-family:"courier new";
+            font-size:10pt;
+         }
+      </STYLE>
+   </HEAD>
+   <BODY bgcolor='khaki'>
+      <BR>
+      <TABLE align='center' width='700px' cellpadding=10 class='OutsideTable'>
+         <TR bgcolor='yellow'>
+            <TD class='TitleTD'>VerbNet-Cyc Mapping Results</TD>
+         </TR>
+         <TR bgcolor='white'>
+            <TD>
+               <TABLE cellpadding=10>
+                  <TR valign='top'>
+                     <TD class='TextBody' width='50%'>
+                     The accuracy and usefulness of each constraint is determined by comparing
+                     the manual mapping to the results of the automatic mapping algorithm for
+                     those classes covered by the manual mapping.  The manual mapping produced
+                     the following results:<BR>
+                     <UL>
+                        <LI>15 main classes covered</LI>
+                        <LI>22 total classes covered (includes subclasses)</LI>
+                        <LI>96 verbs represented</LI>
+                        <LI>289 verb-frame pairs represented</LI>
+                        <LI>403 naive VN-Cyc matches analyzed</LI>
+                        <LI>139 real matches found <UL><LI>81 good</LI><LI>58 maybe</LI></UL></LI>
+                        <LI>264 invalid matches found</LI>
+                     </UL>
+                     Besides the naive constraint, there were 7 additional constraints thought
+                     good enough to include in the automatic matching algorithm.  These are shown
+                     here along with the mnemonic that represents them an a brief description:
+                     <UL>
+                        <LI><FONT class='constraint'>Preposition</FONT> (<FONT class='mn'>p</FONT>) - 
+                        if a Cyc rule specifies an adjoining preposition, that preposition must be included
+                        somewhere after the verb in the VerbNet syntax.</LI>
+
+                        <LI><FONT class='constraint'>Transitivity</FONT> (<FONT class='mn'>t</FONT>) - 
+                        if a Cyc rule is <FONT class='tr'>TransitiveNPFrame</FONT> or 
+                        <FONT class='tr'>DitransitivePPFrameType</FONT> then the VerbNet syntax must specify
+                        a noun phrase immediately after the verb.  If the Cyc rule is 
+                        <FONT class='tr'>IntransitiveVerbFrame</FONT>, <FONT class='tr'>MiddleVoiceFrame</FONT>, or
+                        <FONT class='tr'>TransitivePPFrameType</FONT> then the VerbNet syntax must not have
+                        a noun phrase immediately after the verb.</LI>
+
+                        <LI><FONT class='constraint'>Infinitive/Gerund</FONT> (<FONT class='mn'>i</FONT>) - 
+                        a Cyc rule can contain the token <FONT class='tr'>:INF-COMP</FONT> or 
+                        <FONT class='tr'>:GERUND</FONT> if and only if the VerbNet syntax contains a syntax
+                        restriction related to 'inf' or 'ing'.</LI>
+                        
+                        <LI><FONT class='constraint'>Adjective</FONT> (<FONT class='mn'>j</FONT>) - 
+                        a Cyc rule can contain the token <FONT class='tr'>:ADJ</FONT> if and only if the VerbNet
+                        syntax contains an adjective</LI>
+
+                        <LI><FONT class='constraint'>fromLocation Implies Source</FONT> (<FONT class='mn'>f</FONT>) - 
+                        if a Cyc rule uses the predicate <FONT class='tr'>fromLocation</FONT> to specify
+                        the object of the rule (<FONT class='tr'>:OBJECT</FONT>) then the VerbNet syntax 
+                        must have the noun phrase 'Source' immediately following the verb.
+                        </LI>
+
+                        <LI><FONT class='constraint'>doneBy/performedBy Implies Agent</FONT> (<FONT class='mn'>d</FONT>) - 
+                        if a Cyc rule uses the predicates <FONT class='tr'>doneBy</FONT> or <FONT class='tr'>performedBy</FONT>
+                        to specify the subject of the rule (<FONT class='tr'>:SUBJECT</FONT>) then the VerbNet syntax
+                        must have the noun phrase 'Agent' immediately preceding the verb.
+                        </LI>
+
+                        <LI><FONT class='constraint'>Middle Voice Implies No Agent</FONT> (<FONT class='mn'>m</FONT>) - 
+                        if a Cyc rule is <FONT class='tr'>MiddleVoiceFrame</FONT> then the VerbNet syntax must not have
+                        the noun phrase 'Agent' immediately preceding the verb.
+                        </LI>
+                     </UL>
+                     An automatic matching algorithm is a success if it matches 100% of the possible matches that
+                     the manual mapping matched, and discards 100% of the possible matches that the 
+                     manual mapping discarded.  In this case the automatic matching algorithm would be a success
+                     if it matched all 139 that the manual mapping matched, and discarded the 264 that
+                     the manual mapping discarded.<BR><BR>
+                     The automatic matching algorithm is the sum of its parts, i.e. the constraints it implements.
+                     A constraint is good if it does not incorrectly discard actual matches and if it discards
+                     as many of the actual discards as it can.  No one constraint can discard all of the possible
+                     matches that need to be discarded.  They work in unison.<BR><BR> Below are two charts.  The first
+                     describes the number of possible matches that the constraint matched correctly (i.e. the manual
+                     mapping had the same match).  The second chart shows the number of possible matches that
+                     the constraint discarded correctly (i.e. the manual mapping discarded the same possible match).<BR><BR>
+
+                     <CENTER><IMG src="images/correctm.jpg" width=489 height=290 alt="Correct Matches"><BR><BR>
+                     <IMG src="images/correctd.jpg" width=489 height=290 alt="Correct Discards"></CENTER><BR>
+                     As you can see only <FONT class='mn'>t</FONT> and <FONT class='mn'>i</FONT> 
+                     incorrectly discarded a possible match.  The counts for the 
+                     'Correct Discards' chart do not add up to the 'All' column because some of the constraints
+                     discard the same possible matches (there's overlap).  The naive algorithm does not correctly
+                     discard any that the manual mapping discarded since the manual mapping began with naive matches.
+
+                     <BR><BR>When shown as a percentage of the total possible in each category we have:<BR><BR>
+                     <TABLE style="border:1px #000000 solid" align='center' cellspacing=5>
+                        <TR><TD colspan=9 align='center'>% of manual mapping matches matched by auto</TD></TR>
+                        <TR>
+                           <TD align='center'>n</TD>
+                           <TD align='center'>np</TD>
+                           <TD align='center'>nt</TD>
+                           <TD align='center'>ni</TD>
+                           <TD align='center'>nj</TD>
+                           <TD align='center'>nf</TD>
+                           <TD align='center'>nd</TD>
+                           <TD align='center'>nm</TD>
+                           <TD align='center'><FONT color='blue'>All</FONT></TD>
+                        </TR>
+                        <TR>
+                           <TD align='center'>100%</TD>
+                           <TD align='center'>100%</TD>
+                           <TD align='center'>97%</TD>
+                           <TD align='center'>99%</TD>
+                           <TD align='center'>100%</TD>
+                           <TD align='center'>100%</TD>
+                           <TD align='center'>100%</TD>
+                           <TD align='center'>100%</TD>
+                           <TD align='center'><FONT color='blue'>96%</FONT></TD>
+                        </TR>
+                        <TR><TD colspan=9 align='center' style='border-top:1px #000000 solid'>% of 
+                        manual mapping discards discarded by auto</TD></TR>
+                        <TR>
+                           <TD align='center'>n</TD>
+                           <TD align='center'>np</TD>
+                           <TD align='center'>nt</TD>
+                           <TD align='center'>ni</TD>
+                           <TD align='center'>nj</TD>
+                           <TD align='center'>nf</TD>
+                           <TD align='center'>nd</TD>
+                           <TD align='center'>nm</TD>
+                           <TD align='center'><FONT color='blue'>All</FONT></TD>
+                        </TR>
+                        <TR>
+                           <TD align='center'>0%</TD>
+                           <TD align='center'>14%</TD>
+                           <TD align='center'>53%</TD>
+                           <TD align='center'>9%</TD>
+                           <TD align='center'>1%</TD>
+                           <TD align='center'>1%</TD>
+                           <TD align='center'>27%</TD>
+                           <TD align='center'>5%</TD>
+                           <TD align='center'><FONT color='blue'>75%</FONT></TD>
+                        </TR>
+                     </TABLE>
+                     <BR>
+                     Now that we've seen the relative accuracy and usefulness of each constraint on the manual
+                     mapping data, what effect does each have on the whole of the possible VerbNet-Cyc mapping?
+                     If there are 29,245 verb-frame pairs in VerbNet, and 3,256 Cyc rules, then there are
+                     <PRE>   29,245 x 3,256 = 95,221,720</PRE>
+                     possible matches.  But this huge number includes extraneous possible matches (like
+                     between a verb-frame pair for verb 'jump' and the Cyc rule for verb 'smash').  After the 
+                     naive constraint is applied we get 26,162 possible matches.  From this number we can
+                     see the effect each constraint has on all the data.  Below is number of possible 
+                     matches discarded for all naive matches:
+                     <BR><BR>
+                     <TABLE style="border:1px #000000 solid" align='center' cellspacing=5>
+                        <TR>
+                           <TD align='center'>n</TD>
+                           <TD align='center'>np</TD>
+                           <TD align='center'>nt</TD>
+                           <TD align='center'>ni</TD>
+                           <TD align='center'>nj</TD>
+                           <TD align='center'>nf</TD>
+                           <TD align='center'>nd</TD>
+                           <TD align='center'>nm</TD>
+                           <TD align='center'><FONT color='blue'>All</FONT></TD>
+                        </TR>
+                        <TR>
+                           <TD align='center'>0</TD>
+                           <TD align='center'>5,265</TD>
+                           <TD align='center'>8,947</TD>
+                           <TD align='center'>1,738</TD>
+                           <TD align='center'>1,811</TD>
+                           <TD align='center'>19</TD>
+                           <TD align='center'>4,303</TD>
+                           <TD align='center'>583</TD>
+                           <TD align='center'><FONT color='blue'>16,119</FONT></TD>
+                        </TR>
+                     </TABLE>
+                     <BR>
+                     You'll notice that a constraint's performance in the manual mapping does not
+                     necessarily directly correspond to the effect it will have on the complete
+                     of data.  The Adjective constraint, for example, has 9 times less of an effect
+                     on the manual mapping than the Infinitive/Gerund rule (by discards), yet on
+                     the whole it affects more of the entire data (in terms of discards).  This is
+                     because the manual mapping can emphasize different types of rules just based
+                     on the arbitrary manner by which the classes are represented.<BR><BR>
+                     Finally, a rough check can be made as to how reasonable these numbers sound.
+                     The manual mapping analyzed 403 possible matches and found 139 of them to be valid.
+                     This is a 139 / 403 = 34.5% conversion ratio.  The final automatic mapping matched
+                     10,043 matches (26,162 - 16,119 = 10,043).  Thus the conversion ratio is 
+                     10,043 / 26,162 = 38%.  With some more constraints it is reasonable to assume the automatic
+                     mapping could approach the actual conversion ratio discovered by the manual mapping.
+                     <BR><BR>The final mapping is provided here.  It is in XML format and references Cyc rule numbers
+                     as specified in the adjoining files.  A compressed version is also provided.
+                     <UL>
+                        <LI><A href='supplemental/final-auto-mapping.xml'>Final Mapping</A></LI>
+                        <LI><A href='cyc-rule-examples.txt'>Cyc Rule Examples</A></LI>
+                     </UL>
+                     The Cyc rule numbers in the final mapping file correspond to how they are numbered
+                     in the above rule files (the numbering corresponds to order in which they exist in the file).
+                     </TD>
+                  </TR>
+               </TABLE>
+            </TD>
+         </TR>
+         <TR bgcolor='gold'>
+            <TD>
+            <TABLE width='100%' cellspacing=0 cellpadding=0><TR><TD>This page created on 2006.10.25.</TD>
+            <TD align='right'>Cyc rules are copyright &copy; 1995 - 2006 Cycorp</TD></TR></TABLE>
+            </TD>
+         </TR>
+      </TABLE>
+   </BODY>
+</HTML>
+
