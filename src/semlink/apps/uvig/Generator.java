@@ -41,16 +41,15 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
-import enums.RoleValue;
 import slflixer.cc.util.mm.GroupComparator;
 import slflixer.cc.util.mm.MembershipMap;
-import syntax.Role;
-import verbnet.Predicate;
-import verbnet.SemanticFrame;
-import verbnet.VerbNet;
-import verbnet.VerbNetClass;
 
-import java.nio.file.Files;
+import semlink.apps.verbnet.RoleValue;
+import semlink.apps.verbnet.Role;
+import semlink.apps.verbnet.Predicate;
+import semlink.apps.verbnet.SemanticFrame;
+import semlink.apps.verbnet.VerbNet;
+import semlink.apps.verbnet.VerbNetClass;
 
 /**
  * This class is the driver for the UVI web page creation.  It validates all the command-line
@@ -662,9 +661,7 @@ public static void main( String args[] )
 			e1.printStackTrace();
 		}
     	args = new String[]{"-s","/home/kevin/Lexical_Resources/verbnet/", "/var/www/TempUVI/", "web/uvig/supplemental/"};
-        try
-        {
-
+        try {
             // Set the date and time of this program's execution.
             runTime = Calendar.getInstance();
 
@@ -813,7 +810,7 @@ public static void main( String args[] )
                 af += flags.get( f ) + " ";
             }
         }
-
+        
         // Get string representations of the files' paths.
         ip = filePath( inDir );
         dp = filePath( outDir );
